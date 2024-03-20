@@ -8,6 +8,14 @@ export async function postLogin(data){
     },
     body: JSON.stringify(data),
   }); 
-  console.log(await response.json());
+  return await response.json();
 }
 
+export async function getProfile(){
+  const response = await fetch(backend+"/profile",{
+    headers:{
+      'token': localStorage.getItem("idBosque"),
+    },
+  });
+  return await response.json()
+}

@@ -1,4 +1,5 @@
 import {useContext, createContext, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import { postLogin } from "../api/api";
 
 export const ProfileContext = createContext();
@@ -8,6 +9,8 @@ export function useProfile(){
 }
 
 export function ProfileProvider({children}){
+  const navigate = useNavigate();
+
   const [login, setLogin] = useState({});
 
   function ChangerLogin({target:{name, value}}){
@@ -16,7 +19,9 @@ export function ProfileProvider({children}){
 
   async function HandleLogin(e){
     e.preventDefault();
-    await postLogin(login);
+    const {id} = await postLogin(login);
+    localStorage.setItem("idBosque", id);
+    navigate("/redirect");
   }
   
   return(
