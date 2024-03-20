@@ -1,5 +1,5 @@
 extern crate mysql;
-use mysql::{prelude::Queryable, *};
+use mysql::*;
 
 pub fn connect() -> PooledConn{
     let opts = Opts::from_url("mysql://root:pava@localhost:3306/bosque").expect("No se pudo conectar");

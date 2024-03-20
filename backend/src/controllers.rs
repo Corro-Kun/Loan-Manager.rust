@@ -1,10 +1,13 @@
 use crate::models::{data_base::*, response_models::{Error, *}, request_models::*};
 use crate::config::connect;
+use crate::middleware::ApiKey;
+use rocket::response::status::Custom;
+use rocket::http::Status;
 use rocket::serde::json::Json;
 use mysql::{prelude::Queryable, *};
 
 #[post("/login", format = "application/json", data = "<login_data>")]
-pub fn login(login_data: Json<Login>) -> Result<Json<Id>,Json<Error>>{
+pub fn login(login_data: Json<Login>) -> Result<Json<Id>,Custom<Json<Error>>>{
     let mut conn = connect();
 
     let query = format!("select * from usuario where idusuario='{}'",login_data.cedula);
@@ -15,12 +18,12 @@ pub fn login(login_data: Json<Login>) -> Result<Json<Id>,Json<Error>>{
 
     if user.len() != 1 {
         let error = Error{error: String::from("Usuario no encontrado")};
-        return Err(Json(error));
+        return Err(Custom(Status::NotFound, Json(error)))
     }
 
     if user[0].contraseña != login_data.contraseña {
         let error = Error{error: String::from("Contraseña incorrecta")};
-        return Err(Json(error)); 
+        return Err(Custom(Status::Unauthorized, Json(error)))
     }
 
     let data = Id{
@@ -30,3 +33,7 @@ pub fn login(login_data: Json<Login>) -> Result<Json<Id>,Json<Error>>{
     Ok(Json(data))
 }
 
+#[get("/token")]
+pub fn token(token: ApiKey)-> String{
+    format!("Este es tu token: {}", token)   
+}
