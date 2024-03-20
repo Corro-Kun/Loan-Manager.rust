@@ -11,6 +11,6 @@ use cors::*;
 
 #[launch]
 async fn rocket() -> _ {
-    rocket::build().mount("/", routes![login,token ]).attach(CORS)
+    rocket::build().mount("/", routes![login, profile, token]).attach(CORS)
 }
 

@@ -33,6 +33,26 @@ pub fn login(login_data: Json<Login>) -> Result<Json<Id>,Custom<Json<Error>>>{
     Ok(Json(data))
 }
 
+#[get("/profile")]
+pub fn profile(token: ApiKey) -> Result<Json<Usuario>,Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = format!("SELECT * FROM usuario WHERE idusuario='{}'", token);
+
+    let user: Vec<Usuario> = conn.query_map(query, |(idusuario, nombre, apellido, imagen, rol, contraseña)|{
+       Usuario {idusuario, nombre, apellido, imagen, rol, contraseña}
+    }).expect("No se pudo obtener usuarios");
+
+    if user.len() != 1 {
+        let error = Error{error: String::from("Usuario no encontrado")};
+        return Err(Custom(Status::NotFound, Json(error)))
+    }
+
+    let data = &user[0];
+
+    Ok(Json(data.clone()))
+}
+
 #[get("/token")]
 pub fn token(token: ApiKey)-> String{
     format!("Este es tu token: {}", token)   
