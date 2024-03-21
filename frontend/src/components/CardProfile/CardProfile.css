@@ -1,0 +1,28 @@
+.CardProfile-Div{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.CardProfile-Div picture{
+  display: flex;
+  height: 200px;
+  width: 200px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .5);
+  box-shadow: 0 0 20px rgba(0,0,0, .5);
+  overflow: hidden;
+  cursor: pointer;
+  transition: .5s;
+}
+.CardProfile-Div picture:hover{
+  border-radius: 40%;
+  border: 1px solid var(--Bg_Color);
+  box-shadow: 0 0 20px var(--Bg_Color);
+}
+.CardProfile-Div img{
+  height: 200px;
+}
