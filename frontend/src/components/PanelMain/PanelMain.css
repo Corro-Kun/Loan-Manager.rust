@@ -1,0 +1,8 @@
+.PanelMain-Div{
+  display: flex;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}

@@ -1,0 +1,33 @@
+.ButtonImage-Div{
+  width: 15%;
+  height: 170px;
+  border: 1px solid rgba(0,0,0, .5);
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0, .5);
+  cursor: pointer;
+  transition: .2s;
+}
+@keyframes transitionButton{
+  0%{
+    transform: rotate(0deg) scale(1);
+  }
+  100%{
+    transform: rotate(360deg) scale(1.1);
+  }
+}
+.ButtonImage-Div:hover{
+  box-shadow: 0 0 20px var(--Main_Color);;
+  border: 1px solid var(--Main_Color);
+  transform: scale(1.05);
+  /* animation: transitionButton .3s; */
+}
+.ButtonImage-Div picture{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.ButtonImage-Div img{
+  height: 100%;
+}
