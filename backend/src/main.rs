@@ -8,9 +8,10 @@ mod middleware;
 
 use controllers::*;
 use cors::*;
+use rocket::fs::FileServer;
 
 #[launch]
 async fn rocket() -> _ {
-    rocket::build().mount("/", routes![login, profile, token]).attach(CORS)
+    rocket::build().mount("/", routes![login, profile, add_user]).mount("/upload", FileServer::from("./upload")).attach(CORS)
 }
 

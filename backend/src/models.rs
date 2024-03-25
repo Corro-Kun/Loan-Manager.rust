@@ -65,14 +65,31 @@ pub mod response_models{
     pub struct Id{
         pub id: String
     }
+
+    #[derive(Debug, Serialize, Deserialize)]
+    pub struct Message{
+        pub message: String
+    }
 }
 
 pub mod request_models{
     use serde::{Serialize, Deserialize};
+    use rocket::form::FromForm;
+    use rocket::fs::TempFile;
 
     #[derive(Debug, Serialize, Deserialize)]
     pub struct Login{
         pub cedula: String,
         pub contraseña: String
+    }
+
+    #[derive(FromForm)]
+    pub struct AddUser<'r>{
+        pub idusuario: String,
+        pub nombre: String,
+        pub apellido: String,
+        pub rol: i64,
+        pub contraseña: String,
+        pub file: TempFile<'r>, 
     }
 }

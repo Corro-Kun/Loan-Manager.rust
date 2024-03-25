@@ -176,7 +176,7 @@ CREATE TABLE `usuario` (
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` VALUES
-('1','admin','kun','http://localhost:3000/predefault/admin.png',1,'MTIzNAoK');
+('1','admin','kun','http://localhost:8000/upload/predefault/admin.png',1,'MTIzNAoK');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -189,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-25 14:32:35
+-- Dump completed on 2024-03-25 16:48:02

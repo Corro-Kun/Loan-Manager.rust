@@ -1,0 +1,8 @@
+[default]
+# address = "192.168.20.24"
+# port = 80
+
+[default.limits]
+form = "65 MiB"
+data-form = "100 MiB"
+file = "200 MiB"
