@@ -58,7 +58,9 @@ pub fn profile(token: ApiKey) -> Result<Json<Usuario>,Custom<Json<Error>>>{
 pub async fn add_user(mut usuario: Form<AddUser<'_>>) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();
 
-    let user: Vec<Usuario> = conn.query_map(format!("SELECT * FROM usuario WHERE idusuario='{}'", usuario.idusuario),|(idusuario, nombre, apellido, imagen, rol, contraseña)|{
+    let query1 = format!("SELECT * FROM usuario WHERE idusuario='{}'", usuario.idusuario);
+
+    let user: Vec<Usuario> = conn.query_map(&query1,|(idusuario, nombre, apellido, imagen, rol, contraseña)|{
         Usuario {idusuario, nombre, apellido, imagen, rol, contraseña}
     }).expect("Ocurrio un error");
 
@@ -81,7 +83,6 @@ pub async fn add_user(mut usuario: Form<AddUser<'_>>) -> Result<Json<Message>, C
     };
 
     Ok(Json(message))
-
 }
 
 /*
