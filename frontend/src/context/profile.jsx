@@ -28,11 +28,11 @@ export function ProfileProvider({children}){
 
   async function GetProfile(){
     const data = await getProfile();
-    console.log(data);
+    setProfile(data);
   }
   
   return(
-    <ProfileContext.Provider value={{ChangerLogin, HandleLogin, GetProfile}} >
+    <ProfileContext.Provider value={{ChangerLogin, HandleLogin, profile ,GetProfile}} >
       {children}
     </ProfileContext.Provider>
   );
