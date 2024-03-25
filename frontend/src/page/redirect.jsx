@@ -23,7 +23,6 @@ function Redirect(){
       default:
         navigate("/");
     }
-    console.log("iso algo")
   }
 
   return(

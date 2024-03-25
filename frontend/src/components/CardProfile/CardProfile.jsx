@@ -1,6 +1,14 @@
 import "./CardProfile.css";
+import { useEffect } from "react";
+import {useProfile} from "../../context/profile.jsx";
 
 export default function CardProfile(){
+  const {GetProfile} = useProfile();
+
+  useEffect(()=>{
+    GetProfile();
+  },[]);
+
   return(
     <div className="CardProfile-Div" >
       <picture>

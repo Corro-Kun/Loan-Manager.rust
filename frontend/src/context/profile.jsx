@@ -1,6 +1,6 @@
 import {useContext, createContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import { postLogin } from "../api/api";
+import { postLogin, getProfile } from "../api/api";
 
 export const ProfileContext = createContext();
 
@@ -23,9 +23,16 @@ export function ProfileProvider({children}){
     localStorage.setItem("idBosque", id);
     navigate("/redirect");
   }
+
+  const [profile, setProfile] = useState();
+
+  async function GetProfile(){
+    const data = await getProfile();
+    console.log(data);
+  }
   
   return(
-    <ProfileContext.Provider value={{ChangerLogin, HandleLogin}} >
+    <ProfileContext.Provider value={{ChangerLogin, HandleLogin, GetProfile}} >
       {children}
     </ProfileContext.Provider>
   );
