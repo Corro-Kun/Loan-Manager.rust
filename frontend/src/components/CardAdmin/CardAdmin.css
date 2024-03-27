@@ -1,0 +1,7 @@
+.CardAdmin-Div{
+  height: 200px;
+  width: 10%;
+  border-radius: 10px;
+  border: 1px solid var(--Bg_Color);
+  box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+}

@@ -5,6 +5,7 @@ import RolAdmin from "./security/rolAdmin";
 import RolPrestamista from "./security/rolPrestamista"; 
 import Admin from "./page/admin.jsx";
 import CreateUser from "./page/createUser.jsx";
+import ListAdmin from "./page/listAdmin.jsx";
 
 function App(){
   return(
@@ -16,6 +17,7 @@ function App(){
         <Route element={<RolAdmin />} >
           <Route path="/admin" element={<Admin />} />
           <Route path="/new/user" element={<CreateUser />} />
+          <Route path="/list/some" element={<ListAdmin />} />
         </Route>
         {/* Prestamista */}
         <Route element={<RolPrestamista />} > 
