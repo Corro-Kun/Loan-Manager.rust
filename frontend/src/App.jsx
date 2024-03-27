@@ -4,6 +4,7 @@ import Redirect from "./page/redirect";
 import RolAdmin from "./security/rolAdmin";
 import RolPrestamista from "./security/rolPrestamista"; 
 import Admin from "./page/admin.jsx";
+import CreateUser from "./page/createUser.jsx";
 
 function App(){
   return(
@@ -14,6 +15,7 @@ function App(){
         {/* Admin */}
         <Route element={<RolAdmin />} >
           <Route path="/admin" element={<Admin />} />
+          <Route path="/new/user" element={<CreateUser />} />
         </Route>
         {/* Prestamista */}
         <Route element={<RolPrestamista />} > 
