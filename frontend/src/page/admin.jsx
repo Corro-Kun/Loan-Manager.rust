@@ -13,9 +13,9 @@ function Admin(){
           <CardProfile />
         </ProfileProvider>
         <PanelMain>
-          <ButtonImage image={"https://cdn-icons-png.flaticon.com/256/11911/11911131.png"} /> 
-          <ButtonImage image={"https://cdn-icons-png.freepik.com/512/10608/10608883.png"} />
-          <ButtonImage image={"https://cdn.icon-icons.com/icons2/1128/PNG/512/1486164728-118_79708.png"} />
+          <ButtonImage image={"https://cdn-icons-png.flaticon.com/256/11911/11911131.png"} title={"Crear usuario"} /> 
+          <ButtonImage image={"https://cdn-icons-png.freepik.com/512/10608/10608883.png"} title={"Crear un objeto"} />
+          <ButtonImage image={"https://cdn.icon-icons.com/icons2/1128/PNG/512/1486164728-118_79708.png"} title={"Lista general"} />
         </PanelMain>      
       </BodyMain>
 
