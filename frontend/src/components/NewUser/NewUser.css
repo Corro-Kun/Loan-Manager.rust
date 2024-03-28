@@ -82,6 +82,8 @@
 }
 
 .NewUser-Img picture{
+  height: 300px;
+  width: 300px;
   display: flex; 
   border: 2px solid var(--Main_Color);
   border-radius: 10px;
