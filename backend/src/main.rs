@@ -12,6 +12,6 @@ use rocket::fs::FileServer;
 
 #[launch]
 async fn rocket() -> _ {
-    rocket::build().mount("/", routes![login, profile, add_user]).mount("/upload", FileServer::from("./upload")).attach(CORS)
+    rocket::build().mount("/", routes![login, profile, add_user, get_user]).mount("/upload", FileServer::from("./upload")).attach(CORS)
 }
 

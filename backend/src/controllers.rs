@@ -85,6 +85,19 @@ pub async fn add_user(mut usuario: Form<AddUser<'_>>) -> Result<Json<Message>, C
     Ok(Json(message))
 }
 
+#[get("/user")]
+pub fn get_user() -> Result<Json<Vec<Usuario>>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = String::from("SELECT * FROM usuario");
+
+    let user: Vec<Usuario> = conn.query_map(&query, |(idusuario, nombre, apellido, imagen, rol, contraseña)|{
+        Usuario{idusuario, nombre, apellido, imagen, rol, contraseña}
+    }).expect("Ocurrio un error");
+
+    Ok(Json(user))
+}
+
 /*
 #[post("/upload", data = "<upload>")]
 pub async fn add_user(mut upload: Form<AddUser<'_>>) -> String{
