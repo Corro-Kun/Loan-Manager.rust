@@ -1,4 +1,5 @@
 import {useContext, createContext, useState} from "react";
+import {postCreateUser} from "../api/api.js";
 
 const ContextAdmin = createContext();
 
@@ -18,9 +19,16 @@ export function ProviderAdmin({children}){
     }
   }
 
-  function handleUsuario(e){
+  async function handleUsuario(e){
     e.preventDefault();
-    console.log(usuario);
+    const form = new FormData();
+    form.append("idusuario", usuario.idusuario);
+    form.append("nombre", usuario.nombre);
+    form.append("apellido", usuario.apellido);
+    form.append("rol", 2);
+    form.append("contraseña", usuario.contraseña);
+    form.append("file", usuario.file);
+    await postCreateUser(form);
   }
 
   return(

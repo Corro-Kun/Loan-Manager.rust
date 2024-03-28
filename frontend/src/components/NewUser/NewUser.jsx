@@ -27,11 +27,11 @@ export default function NewUser(){
           </div>
           <div className="NewUser-Input-Label" >
             <label>Apellido</label>
-            <input type="text" required onChange={(e)=> changerUsuario(e)} name="contraseña" />
+            <input type="text" required onChange={(e)=> changerUsuario(e)} name="apellido" />
           </div>
           <div className="NewUser-Input-Label" >
             <label>Contraseña</label>
-            <input type="password" required />
+            <input type="password" required onChange={(e)=> changerUsuario(e)} name="contraseña"/>
           </div>
           <div className="NewUser-Buttons" >
             <button>Crear</button>

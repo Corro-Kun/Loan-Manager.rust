@@ -19,3 +19,11 @@ export async function getProfile(){
   });
   return await response.json()
 }
+
+export async function postCreateUser(data){
+  const response = await fetch(backend+"/newuser",{
+    method: "POST",
+    body: data,
+  });
+  return await response.json();
+}
