@@ -54,7 +54,7 @@ pub fn profile(token: ApiKey) -> Result<Json<Usuario>,Custom<Json<Error>>>{
     Ok(Json(data.clone()))
 }
 
-#[post("/newuser", data = "<usuario>")]
+#[post("/user", data = "<usuario>")]
 pub async fn add_user(mut usuario: Form<AddUser<'_>>) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();
 
