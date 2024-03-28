@@ -21,7 +21,7 @@ export async function getProfile(){
 }
 
 export async function postCreateUser(data){
-  const response = await fetch(backend+"/newuser",{
+  const response = await fetch(backend+"/new/user",{
     method: "POST",
     body: data,
   });

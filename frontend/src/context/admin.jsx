@@ -1,5 +1,6 @@
 import {useContext, createContext, useState} from "react";
 import {postCreateUser} from "../api/api.js";
+import {useNavigate} from "react-router-dom";
 
 const ContextAdmin = createContext();
 
@@ -9,6 +10,7 @@ export function useAdmin(){
 
 export function ProviderAdmin({children}){
   const [usuario, setUsuario] = useState({});
+  const navigate = useNavigate();
 
   function changerUsuario({target:{name, value, files}}){
     if(name === "file"){
@@ -29,6 +31,7 @@ export function ProviderAdmin({children}){
     form.append("contraseña", usuario.contraseña);
     form.append("file", usuario.file);
     await postCreateUser(form);
+    navigate("/admin");
   }
 
   return(
