@@ -1,5 +1,6 @@
 import "./LoginRegister.css"
 import { useProfile } from "../../context/profile";
+import {toast} from "sonner";
 
 export default function LoginRegister(){
   const {ChangerLogin, HandleLogin} = useProfile();
@@ -9,7 +10,11 @@ export default function LoginRegister(){
   <div className="Login-Register-DolHack" >
     <div className="Login-Home">
       <h2>Iniciar sesión</h2>
-        <form onSubmit={(e)=> HandleLogin(e)} >
+        <form onSubmit={(e)=> toast.promise(HandleLogin(e),{
+            loading: "Iniciando sesión...",
+            success: "Bienvenido",
+            error: (err) => err
+          })} >
           <div className="Input-box">
             <input 
               type="text" 

@@ -6,9 +6,11 @@ import RolPrestamista from "./security/rolPrestamista";
 import Admin from "./page/admin.jsx";
 import CreateUser from "./page/createUser.jsx";
 import ListAdmin from "./page/listAdmin.jsx";
+import {Toaster} from "sonner";
 
 function App(){
   return(
+    <>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -25,6 +27,10 @@ function App(){
         </Route>
       </Routes> 
     </BrowserRouter>
+    <Toaster
+        toastOptions={{style:{backgroundColor: "var(--Body_Color)",color: "var(--Text_Color)", boxShadow: "0 0 20px rgba(0, 0, 0, .2)", border: "1px solid var(--Main_Color)"}}}
+    />
+    </> 
   );
 }
 

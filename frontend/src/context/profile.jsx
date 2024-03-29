@@ -19,7 +19,10 @@ export function ProfileProvider({children}){
 
   async function HandleLogin(e){
     e.preventDefault();
-    const {id} = await postLogin(login);
+    const data = await postLogin(login);
+    if (data.error){
+      throw new Error(data.error);
+    }
     localStorage.setItem("idBosque", id);
     navigate("/redirect");
   }
