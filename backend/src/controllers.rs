@@ -69,13 +69,13 @@ pub async fn add_user(mut usuario: Form<AddUser<'_>>) -> Result<Json<Message>, C
         return Err(Custom(Status::Conflict, Json(error)))
     }
 
-    let path = format!("./upload/{}.png",usuario.idusuario);
+    let path = format!("./upload/user/{}.png",usuario.idusuario);
 
     usuario.file.copy_to(&path).await.expect("Error a la hora de guardar la imagen");
 
     let query = "INSERT INTO usuario(idusuario, nombre, apellido, imagen, rol, contraseña) VALUES(?, ?, ?, ?, ?, ?)";
 
-    conn.exec_drop(query, (&usuario.idusuario, &usuario.nombre, &usuario.apellido, format!("http://localhost:8000/upload/{}.png",usuario.idusuario), usuario.rol, &usuario.contraseña))
+    conn.exec_drop(query, (&usuario.idusuario, &usuario.nombre, &usuario.apellido, format!("http://localhost:8000/upload/user/{}.png",usuario.idusuario), usuario.rol, &usuario.contraseña))
         .expect("Ocurrio un Error al guardar");
 
     let message = Message{
