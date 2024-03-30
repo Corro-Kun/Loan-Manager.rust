@@ -3,6 +3,7 @@ import { FaArrowRightFromBracket } from "react-icons/fa6";
 import {useNavigate} from "react-router-dom";
 import {useRef, useState} from "react";
 import {useAdmin} from "../../context/admin.jsx";
+import {toast} from "sonner";
 
 export default function NewUser(){
   const navigate = useNavigate(); 
@@ -12,7 +13,11 @@ export default function NewUser(){
 
   return(
     <div className="NewUser-Render-Div" >
-      <form className="NewUser-Div" onSubmit={(e)=> handleUsuario(e)} >
+      <form className="NewUser-Div" onSubmit={(e)=> toast.promise(handleUsuario(e),{
+        loading: "Creando usuario...",
+        success: "Usuario creado",
+        error: (err)=> err
+      })} >
         <div className="NewUser-Input" >
           <div className="NewUser-Quite-Div" >
             <h2 className="NewUser-Quite" onClick={()=> navigate("/admin")} ><FaArrowRightFromBracket /></h2>

@@ -1,11 +1,11 @@
 .BodyList-Main{
-  padding: 0 5% 0 5%;
+  padding: 0 10% 0 10%;
   height: 90%;
   width: 100%;
 }
 
 .BodyList-Div-Render{
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;

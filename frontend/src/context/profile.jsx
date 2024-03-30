@@ -23,7 +23,7 @@ export function ProfileProvider({children}){
     if (data.error){
       throw new Error(data.error);
     }
-    localStorage.setItem("idBosque", id);
+    localStorage.setItem("idBosque", data.id);
     navigate("/redirect");
   }
 

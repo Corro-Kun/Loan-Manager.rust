@@ -30,7 +30,10 @@ export function ProviderAdmin({children}){
     form.append("rol", 2);
     form.append("contraseña", usuario.contraseña);
     form.append("file", usuario.file);
-    await postCreateUser(form);
+    const data = await postCreateUser(form);
+    if(data.error){
+      throw new Error(data.error);
+    }
     navigate("/admin");
   }
 
