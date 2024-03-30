@@ -1,7 +1,8 @@
 .BodyList-Main{
-  padding: 0 10% 0 10%;
-  height: 90%;
+  padding: 20px 10% 0 10%;
+  height: 95%;
   width: 100%;
+  overflow-y: auto;
 }
 
 .BodyList-Div-Render{

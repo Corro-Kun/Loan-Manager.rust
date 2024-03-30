@@ -19,6 +19,7 @@ function App(){
         <Route element={<RolAdmin />} >
           <Route path="/admin" element={<Admin />} />
           <Route path="/new/user" element={<CreateUser />} />
+          <Route path="/new/item" element={<h2>hola</h2>} />
           <Route path="/list/some" element={<ListAdmin />} />
         </Route>
         {/* Prestamista */}
