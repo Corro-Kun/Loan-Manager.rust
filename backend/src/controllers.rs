@@ -75,7 +75,7 @@ pub async fn add_user(mut usuario: Form<AddUser<'_>>) -> Result<Json<Message>, C
 
     let query = "INSERT INTO usuario(idusuario, nombre, apellido, imagen, rol, contraseña) VALUES(?, ?, ?, ?, ?, ?)";
 
-    conn.exec_drop(query, (&usuario.idusuario, &usuario.nombre, &usuario.apellido, format!("http://localhost:8000/upload/user/{}.png",usuario.idusuario), usuario.rol, &usuario.contraseña))
+    conn.exec_drop(query, (&usuario.idusuario, &usuario.nombre, &usuario.apellido, format!("http://localhost:8000/upload/user/{}.png",usuario.idusuario), &usuario.rol, &usuario.contraseña))
         .expect("Ocurrio un Error al guardar");
 
     let message = Message{
