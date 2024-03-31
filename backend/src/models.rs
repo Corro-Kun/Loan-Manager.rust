@@ -10,7 +10,7 @@ pub mod data_base{
         idprestamo: i64
     }
 
-    #[derive(Debug, Serialize, Deserialize)]
+    #[derive(Debug, Serialize, Deserialize, Clone)]
     pub struct Items{
         pub iditem: String,
         pub nombre: String,

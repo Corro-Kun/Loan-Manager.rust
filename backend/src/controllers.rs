@@ -130,6 +130,19 @@ pub async fn post_item(mut item: Form<AddItem<'_>>) -> Result<Json<Message>, Cus
     Ok(Json(message))
  }
 
+#[get("/item")]
+pub fn get_item() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = String::from("SELECT * FROM items");
+
+    let items: Vec<Items> = conn.query_map(query, |(iditem, nombre, descripcion, imagen)|{
+        Items{iditem, nombre, descripcion, imagen}
+    }).expect("Ocurrio un error en la consulta de items");
+
+    Ok(Json(items))
+}
+
 /*
 #[post("/upload", data = "<upload>")]
 pub async fn add_user(mut upload: Form<AddUser<'_>>) -> String{
