@@ -98,6 +98,38 @@ pub fn get_user() -> Result<Json<Vec<Usuario>>, Custom<Json<Error>>>{
     Ok(Json(user))
 }
 
+#[post("/item", data = "<item>")]
+pub async fn post_item(mut item: Form<AddItem<'_>>) -> Result<Json<Message>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query_1 = format!("select * from items where iditem='{}'", item.iditem);
+
+    let items: Vec<Items> = conn.query_map(&query_1, |(iditem, nombre, descripcion, imagen)|{
+        Items{
+            iditem, nombre, descripcion, imagen
+        } 
+    }).expect("Ocurrio un error"); 
+
+    if items.len() >= 1{
+        let error = Error{error: String::from("este item ya existe")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }
+
+    let path = format!("./upload/item/{}.png", item.iditem);
+
+    item.file.copy_to(&path).await.expect("Error al guardar la imagen");
+
+    let query_2 = String::from("INSERT INTO items(iditem, nombre, descripcion, imagen) VALUES (?, ?, ?, ?)");
+
+    conn.exec_drop(&query_2,(&item.iditem, &item.nombre, &item.descripcion, format!("http://localhost:8000/upload/item/{}.png", item.iditem))).expect("Ocurrio un Error al guardar el archivo");
+
+    let message = Message{
+        message: String::from("Item creado") 
+    };
+
+    Ok(Json(message))
+ }
+
 /*
 #[post("/upload", data = "<upload>")]
 pub async fn add_user(mut upload: Form<AddUser<'_>>) -> String{

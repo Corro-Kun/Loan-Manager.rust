@@ -12,10 +12,10 @@ pub mod data_base{
 
     #[derive(Debug, Serialize, Deserialize)]
     pub struct Items{
-        iditem: String,
-        nombre: String,
-        descripcion: String,
-        imagen: String
+        pub iditem: String,
+        pub nombre: String,
+        pub descripcion: String,
+        pub imagen: String
     }
 
     #[derive(Debug, Serialize, Deserialize)]
@@ -91,5 +91,13 @@ pub mod request_models{
         pub rol: i64,
         pub contraseña: String,
         pub file: TempFile<'r>, 
+    }
+
+    #[derive(FromForm)]
+    pub struct AddItem<'r>{
+        pub iditem: String,
+        pub nombre: String,
+        pub descripcion: String,
+        pub file: TempFile<'r>,
     }
 }
