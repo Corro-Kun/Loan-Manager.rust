@@ -1,0 +1,116 @@
+.FormItem-Render-Div{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.FormItem-Div{
+  width: 30%;
+  height: 74%;
+  border: 1px solid var(--Main_Color);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.FormItem-H2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.FormItem-Div-Picture{
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.FormItem-Div-Picture picture{
+  display: flex;
+  width: 80%;
+  height: 400px;
+  overflow: hidden;
+  border: 3px solid var(--Bg_Color);
+  border-radius: 10px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.FormItem-Div-Picture img{
+  height: 430px;
+}
+
+.FormItem-Div-Picture button{
+  margin: 0 4%;
+  width: 7% ;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--Bg_Color);
+  color: #fff;
+  transition: .3s;
+}
+
+.FormItem-Div-Picture button:hover{
+  background-color: var(--Bg2_Color);
+}
+
+.FormItem-Div-Form{
+  margin: 10px 20px;
+}
+
+.FormItem-Div-Form div{
+  display: flex;
+  flex-direction: column;
+}
+
+.FormItem-Div-Form label{
+  margin-bottom: 5px;
+}
+
+.FormItem-Div-Form input{
+  padding: 5px 4px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid var(--Bg_Color);
+  border-radius: 5px;
+  font-size: 1em;
+  outline: none;
+}
+
+.FormItem-Div-Form textarea{
+  padding: 5px 4px;
+  height: 70px;
+  resize: none;
+  font-size: 1em;
+  outline: none;
+  border: 1px solid var(--Bg_Color);
+  border-radius: 7px;
+}
+
+.FormItem-Div-Button{
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.FormItem-Div-Button button{
+  padding: 4px 10px;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: var(--Bg_Color);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  transition: .3s;
+}
+
+.FormItem-Div-Button button:hover{
+  background-color: var(--Bg2_Color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
