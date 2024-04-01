@@ -1,39 +1,45 @@
+import {useRef} from "react";
 import "./FormItem.css";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
+import {useAdmin} from "../../context/admin.jsx";
 
 export default function FormItem(){
+  const {changerItem, handleItem} = useAdmin();
+  const inputImg = useRef(null);
+
   return(
     <div className="FormItem-Render-Div" >
-      <div className="FormItem-Div" >
+      <form className="FormItem-Div" onSubmit={(e)=> handleItem(e)} >
         <div className="FormItem-H2" >
           <h2>Crear un item</h2>
         </div>
         <div className="FormItem-Div-Picture" >
           <button><FaLongArrowAltLeft /></button>
-          <picture>
-            <img src="https://img.freepik.com/vector-premium/caricatura-juego-llaves-anillo-negro_9206-7523.jpg" />
+          <picture onClick={()=> inputImg.current.click()} >
+            <img src="http://localhost:8000/upload/predefault/llaves.png" />
           </picture>
+          <input style={{display: "none"}} type="file" ref={inputImg} onChange={(e)=> changerItem(e)} />
           <button><FaLongArrowAltRight /></button>
         </div>
         <div className="FormItem-Div-Form" >
           <div>
             <label>Id</label>
-            <input type="text" required />
+            <input name="iditem" type="text" required onChange={(e)=> changerItem(e)} />
           </div>
           <div>
             <label>Nombre</label>
-            <input type="text" required />
+            <input name="nombre" type="text" required onChange={(e)=> changerItem(e)} />
           </div>
           <div>
             <label>Descripción</label>
-            <textarea required />
+            <textarea name="descripcion" required onChange={(e)=> changerItem(e)} />
           </div>
         </div>
         <div className="FormItem-Div-Button" >
           <button>Crear</button>
           <button>Cancelar</button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

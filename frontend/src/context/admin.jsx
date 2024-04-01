@@ -37,8 +37,24 @@ export function ProviderAdmin({children}){
     navigate("/admin");
   }
 
+  const [item, setItem] = useState({});
+
+  function changerItem({target:{name, value, files}}){
+    if(name === "file"){
+      const [file] = files;
+      setItem({...item, [name]: file});
+    }else{
+      setItem({...item, [name]: value});
+    }
+  }
+
+  async function handleItem(e){
+    e.preventDefault();
+    console.log(item);
+  }
+
   return(
-    <ContextAdmin.Provider value={{changerUsuario, handleUsuario}} >
+    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem}} >
       {children}
     </ContextAdmin.Provider>
   );
