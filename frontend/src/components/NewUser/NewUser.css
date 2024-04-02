@@ -25,6 +25,15 @@
   display: flex;
 }
 
+.NewUser-Quite-Div select {
+  margin: 1px 30px;
+  padding: 2px 5px;
+  height: 20px;
+  background: transparent;
+  border: 1px solid var(--Main_Color);
+  border-radius: 6px;
+}
+
 .NewUser-Quite{
   cursor: pointer;
   margin-bottom: 13%;
@@ -101,4 +110,40 @@
 
 .NewUser-Img img{
   height: 300px;
+}
+
+.NewUser-Class{
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+}
+
+.NewUser-Class-Select{
+  width: 100%;
+  height: 50%;
+  border-left: 3px solid var(--Main_Color);
+  overflow: auto;
+}
+
+.NewUser-Class-Select div{
+  margin: 8px 20px;
+  border: 1px solid var(--Main_Color);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.NewUser-Class-Select div:hover{
+  margin: 8px 10px;
+  padding: 1px;
+  background-color: var(--Main_Color);
+  color: #fff;
+}
+
+.NewUser-Class-Create{
+  width: 100%;
+  height: 50%;
+  border-top: 3px solid var(--Main_Color);
+  border-left: 3px solid var(--Main_Color);
 }

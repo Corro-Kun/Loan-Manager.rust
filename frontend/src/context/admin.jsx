@@ -70,8 +70,18 @@ export function ProviderAdmin({children}){
     setItem({...item, file: archivo});
   }
 
+  const [profesor, setProfesor] = useState(false);
+
+  function changerCreation({target:{value}}){
+    if (value === "0"){
+      setProfesor(false);
+    }else {
+      setProfesor(true);
+    }
+  }
+
   return(
-    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload}} >
+    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload, changerCreation, profesor}} >
       {children}
     </ContextAdmin.Provider>
   );
