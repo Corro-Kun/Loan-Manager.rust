@@ -3,6 +3,7 @@ import "./FormItem.css";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import {useAdmin} from "../../context/admin.jsx";
 import {toast} from "sonner";
+import {useNavigate} from "react-router-dom";
 
 export default function FormItem(){
   const {changerItem, handleItem, ImageDownload} = useAdmin();
@@ -11,6 +12,7 @@ export default function FormItem(){
   const [image, setImage] = useState(images[0]);
   const [index, setIndex] = useState(0);
   const [animation, setAnimation] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(()=>{
     ImageDownload(images[0]);
@@ -80,7 +82,7 @@ export default function FormItem(){
         </div>
         <div className="FormItem-Div-Button" >
           <button type="submit" >Crear</button>
-          <button type="button" >Cancelar</button>
+          <button type="button" onClick={()=> navigate("/admin")} >Cancelar</button>
         </div>
       </form>
     </div>
