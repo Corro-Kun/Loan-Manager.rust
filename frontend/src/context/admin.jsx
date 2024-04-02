@@ -1,5 +1,5 @@
 import {useContext, createContext, useState} from "react";
-import {postCreateUser} from "../api/api.js";
+import {postCreateUser, postCreateItem} from "../api/api.js";
 import {useNavigate} from "react-router-dom";
 
 const ContextAdmin = createContext();
@@ -50,11 +50,28 @@ export function ProviderAdmin({children}){
 
   async function handleItem(e){
     e.preventDefault();
-    console.log(item);
+    const form = new FormData();
+    form.append("iditem", item.iditem);
+    form.append("nombre", item.nombre);
+    form.append("descripcion", item.descripcion);
+    form.append("file", item.file);
+    const data = await postCreateItem(form);
+    if(data.error){
+      throw new Error(data.error);
+    }
+    navigate("/admin");
+  }
+
+  async function ImageDownload(url){
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    const archivo = new File([blob], 'llaves.png', { type: blob.type });
+    setItem({...item, file: archivo});
   }
 
   return(
-    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem}} >
+    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload}} >
       {children}
     </ContextAdmin.Provider>
   );

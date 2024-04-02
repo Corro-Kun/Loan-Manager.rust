@@ -27,3 +27,11 @@ export async function postCreateUser(data){
   });
   return await response.json();
 }
+
+export async function postCreateItem(data){
+  const response = await fetch(backend+"/item",{
+    method: "POST",
+    body: data,
+  });
+  return await response.json();
+}

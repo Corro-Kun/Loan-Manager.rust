@@ -39,6 +39,22 @@
   justify-content: center;
 }
 
+.FormItem-Picture-Animation{
+  animation: animationPicture ease-in-out .5s;
+}
+
+@keyframes animationPicture{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
 .FormItem-Div-Picture img{
   height: 430px;
 }
