@@ -35,11 +35,11 @@ pub mod data_base{
         imagen: String
     }
 
-    #[derive(Debug, Serialize, Deserialize)]
+    #[derive(Debug, Serialize, Deserialize, Clone)]
     pub struct Salon{
-        idsalon: String,
-        programa: String,
-        idprofesor: String
+        pub idsalon: String,
+        pub programa: String,
+        pub idprofesor: String
     }
 
     #[derive(Debug, Serialize, Deserialize, Clone)]

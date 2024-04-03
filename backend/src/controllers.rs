@@ -143,6 +143,58 @@ pub fn get_item() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
     Ok(Json(items))
 }
 
+#[get("/class")]
+pub fn get_class_all() -> Result<Json<Vec<Salon>>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = String::from("select * from salon where idprofesor is null");
+
+    let list_class: Vec<Salon> = conn.query_map(&query, |(idsalon, programa, idprofesor)|{
+        Salon{idsalon, programa, idprofesor}
+    }).expect("Ocurrio un error en la consulta");
+
+    Ok(Json(list_class))
+}
+
+#[get("/class/empty")]
+pub fn get_class_empty() -> Result<Json<Vec<Salon>>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = String::from("select * from salon where idprofesor is null");
+
+    let list_class: Vec<Salon> = conn.query_map(&query, |(idsalon, programa, idprofesor)|{
+        Salon{idsalon, programa, idprofesor}
+    }).expect("Ocurrio un error en la consulta");
+
+    Ok(Json(list_class))
+}
+
+#[post("/class", format = "application/json" ,data = "<salon>")]
+pub fn post_class(salon: Json<Salon>) -> Result<Json<Message>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query1 = format!("select * from salon where idsalon='{}'", salon.idsalon);
+
+    let list_class: Vec<Salon> = conn.query_map(&query1, |(idsalon, programa, idprofesor)|{
+        Salon{idsalon, programa, idprofesor}
+    }).expect("Ocurrio un error en la consulta");
+
+    if list_class.len() >= 1{
+        let error = Error{error: String::from("Ya existe una clase con ese ID")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }
+
+    let query2 = String::from("insert into salon(idsalon, programa) values (?, ?)");
+
+    conn.exec_drop(&query2, (&salon.idsalon, &salon.programa)).expect("Error a la hora de crear el salon");
+
+    let message = Message{
+        message: String::from("Se creo la clase sin problemas")
+    };
+
+    Ok(Json(message)) 
+}
+
 /*
 #[post("/upload", data = "<upload>")]
 pub async fn add_user(mut upload: Form<AddUser<'_>>) -> String{
