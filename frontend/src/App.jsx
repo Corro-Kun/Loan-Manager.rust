@@ -8,6 +8,7 @@ import CreateUser from "./page/createUser.jsx";
 import ListAdmin from "./page/listAdmin.jsx";
 import {Toaster} from "sonner";
 import CreateItem from "./page/createItem.jsx";
+import Prestamista from "./page/prestamista.jsx";
 
 function App(){
   return(
@@ -25,7 +26,7 @@ function App(){
         </Route>
         {/* Prestamista */}
         <Route element={<RolPrestamista />} > 
-          <Route path="/prestamista" element={<h2>Prestamista</h2>} />
+          <Route path="/prestamista" element={<Prestamista />} />
         </Route>
       </Routes> 
     </BrowserRouter>

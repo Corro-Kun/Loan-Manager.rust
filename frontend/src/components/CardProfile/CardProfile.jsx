@@ -15,20 +15,20 @@ export default function CardProfile(){
         profile?.rol == 1? 
           <>
             <picture>
-              <img src={profile.imagen} />
+              <img src={profile?.imagen} />
             </picture>
             <div>
-              <h2>{profile.nombre}</h2>
+              <h2>{profile?.nombre}</h2>
             </div>
           </>
         :
           <>
             <picture>
-              <img src="https://statics.forbes.com.ec/2022/01/crop/61eabe20211cb__400x260.webp" />
+              <img src={profile?.imagen} />
             </picture>
-            <h3>1068512456</h3>
+            <h3>{profile?.idusuario}</h3>
             <div>
-              <h2>Sergio Sevilla</h2>
+              <h2>{profile?.nombre} {profile?.apellido}</h2>
             </div>
           </>
       }

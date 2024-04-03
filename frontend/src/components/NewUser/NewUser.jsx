@@ -9,7 +9,7 @@ export default function NewUser(){
   const navigate = useNavigate(); 
   const inputImage = useRef(null);
   const [img, setImg] = useState("https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514693/77979774-dise%C3%B1o-gr%C3%A1fico-del-ejemplo-del-vector-del-icono-del-perfil-del-hombre-joven.jpg");
-  const {changerUsuario, handleUsuario, changerCreation, profesor} = useAdmin();
+  const {changerUsuario, handleUsuario, changerCreation, profesor, changerClass, HandleClass, classEmpty} = useAdmin();
 
   return(
     <div className="NewUser-Render-Div" >
@@ -28,7 +28,7 @@ export default function NewUser(){
           </div>
           <div className="NewUser-Input-Label" >
             <label>Documento</label>  
-            <input type="text" required onChange={(e)=> changerUsuario(e)} name="idusuario" />
+            <input type="text" required onChange={(e)=> changerUsuario(e)} name="idusuario" autoFocus />
           </div>
           <div className="NewUser-Input-Label" >
             <label>Nombre</label>
@@ -57,27 +57,31 @@ export default function NewUser(){
         <div style={profesor? {} : {display:"none"}} className="NewUser-Class" >
           <div className="NewUser-Class-Select" >
             <h3 style={{textAlign: "center", marginTop: "2px", color: "var(--Text_Color)"}} >Seleciona una clase (opcional)</h3>
-            <div>
-              <p>id</p>
-              <h3>Programa</h3>
-            </div>
-            <div>
-              <p>id</p>
-              <h3>Programa</h3>
-            </div>
+            {
+              classEmpty?.map((data)=>(
+                <div>
+                  <p>{data.programa}</p>
+                  <h3>{data.idsalon}</h3>
+                </div>
+              ))
+            }
           </div>
           <div className="NewUser-Class-Create" >
             <h3 style={{textAlign: "center",margin: "2px 0 20px 0", color: "var(--Text_Color)"}} >Crear una clase (opcional)</h3>
             <div style={{margin: "0 10px"}} className="NewUser-Input-Label" >
               <label>Id</label>
-              <input type="text" onChange={(e)=> changerUsuario(e)} name="idSalon" />
+              <input type="text" name="idsalon" onChange={(e)=> changerClass(e)} />
             </div>
             <div style={{margin: "0 10px"}} className="NewUser-Input-Label" >
               <label>Programa</label>
-              <input type="text" onChange={(e)=> changerUsuario(e)} name="programa" />
+              <input type="text" name="programa" onChange={(e)=> changerClass(e)} />
             </div>
             <div className="NewUser-Buttons" >
-              <button type="button" >Crear</button>
+              <button type="button" onClick={()=> toast.promise(HandleClass(),{
+                success: "Clase creada",
+                loading: "Creando Clase...",
+                error: (err)=> err
+              })} >Crear</button>
             </div>
           </div>
         </div>

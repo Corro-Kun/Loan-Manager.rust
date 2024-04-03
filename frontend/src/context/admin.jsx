@@ -1,5 +1,5 @@
 import {useContext, createContext, useState} from "react";
-import {postCreateUser, postCreateItem} from "../api/api.js";
+import {postCreateUser, postCreateItem, postCreateClass, getClassEmpty} from "../api/api.js";
 import {useNavigate} from "react-router-dom";
 
 const ContextAdmin = createContext();
@@ -72,16 +72,50 @@ export function ProviderAdmin({children}){
 
   const [profesor, setProfesor] = useState(false);
 
-  function changerCreation({target:{value}}){
+  async function changerCreation({target:{value}}){
     if (value === "0"){
       setProfesor(false);
     }else {
       setProfesor(true);
+      await getClassEmp();
     }
   }
 
+  const [classs, setClasss] = useState({
+    idsalon: "",
+    programa: "",
+    idprofesor: "",
+  });
+
+  function changerClass({target:{value, name}}){
+    setClasss({...classs,[name]: value});
+  }
+
+  async function HandleClass(){
+    if(classs.idsalon.length < 2){
+      throw new Error("el id es muy corto");
+    }else if(classs.programa.length < 2){
+      throw new Error("El programa es muy corto");
+    }
+    
+    const data = await postCreateClass(classs);
+
+    if(data.error){
+      throw new Error(data.error);
+    }
+
+    await getClassEmp();
+  }
+
+  const [classEmpty, setClassEmpty] = useState([]);
+
+  async function getClassEmp(){
+    const data = await getClassEmpty();
+    setClassEmpty(data);
+  }
+
   return(
-    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload, changerCreation, profesor}} >
+    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload, changerCreation, profesor, changerClass, HandleClass, classEmpty}} >
       {children}
     </ContextAdmin.Provider>
   );
