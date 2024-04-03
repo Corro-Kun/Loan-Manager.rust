@@ -147,10 +147,10 @@ pub fn get_item() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
 pub fn get_class_all() -> Result<Json<Vec<Salon>>, Custom<Json<Error>>>{
     let mut conn = connect();
 
-    let query = String::from("select * from salon where idprofesor is null");
+    let query = String::from("select programa, idsalon from salon");
 
-    let list_class: Vec<Salon> = conn.query_map(&query, |(idsalon, programa, idprofesor)|{
-        Salon{idsalon, programa, idprofesor}
+    let list_class: Vec<Salon> = conn.query_map(&query, |(idsalon, programa)|{
+        Salon {idsalon, programa, idprofesor: String::from("1234")}
     }).expect("Ocurrio un error en la consulta");
 
     Ok(Json(list_class))
@@ -160,10 +160,10 @@ pub fn get_class_all() -> Result<Json<Vec<Salon>>, Custom<Json<Error>>>{
 pub fn get_class_empty() -> Result<Json<Vec<Salon>>, Custom<Json<Error>>>{
     let mut conn = connect();
 
-    let query = String::from("select * from salon where idprofesor is null");
+    let query = String::from("select programa, idsalon from salon where idprofesor is null");
 
-    let list_class: Vec<Salon> = conn.query_map(&query, |(idsalon, programa, idprofesor)|{
-        Salon{idsalon, programa, idprofesor}
+    let list_class: Vec<Salon> = conn.query_map(&query, |(idsalon, programa)|{
+        Salon {idsalon, programa, idprofesor: String::from("1234")}
     }).expect("Ocurrio un error en la consulta");
 
     Ok(Json(list_class))
