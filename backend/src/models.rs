@@ -51,6 +51,13 @@ pub mod data_base{
         pub rol: i8,
         pub contraseña: String
     }
+
+    #[derive(Debug, Serialize, Deserialize)]
+    pub struct Estudiante{
+        pub idestudiante: String,
+        pub nombre: String,
+        pub apellido: String
+    }
 }
 
 pub mod response_models{

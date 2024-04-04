@@ -163,7 +163,7 @@ pub fn get_class_empty() -> Result<Json<Vec<Salon>>, Custom<Json<Error>>>{
     let query = String::from("select programa, idsalon from salon where idprofesor is null");
 
     let list_class: Vec<Salon> = conn.query_map(&query, |(idsalon, programa)|{
-        Salon {idsalon, programa, idprofesor: String::from("1234")}
+        Salon {idsalon, idprofesor: String::from("1234"), programa}
     }).expect("Ocurrio un error en la consulta");
 
     Ok(Json(list_class))
@@ -251,6 +251,33 @@ pub fn post_teacher_class(teacher: Json<TeacherWithClass>) -> Result<Json<Messag
 
     Ok(Json(message)) 
   
+}
+
+#[post("/student", format = "application/json", data = "<student>")]
+pub fn post_student(student: Json<Estudiante>) -> Result<Json<Message>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query_1 = format!("SELECT * FROM estudiante where idestudiante='{}'", student.idestudiante);
+
+    let list_student: Vec<Estudiante> = conn.query_map(&query_1, |(idestudiante, nombre, apellido)|{
+        Estudiante{idestudiante, nombre, apellido}
+    }).expect("Error en la consulta");
+
+    if list_student.len() >= 1{
+        let error = Error{error: String::from("Ya existe un estudiante con ese id")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }
+
+    let query_2 = String::from("INSERT INTO estudiante(idestudiante, nombre, apellido) values (?, ?, ?)");
+
+    conn.exec_drop(&query_2, (&student.idestudiante, &student.nombre, &student.apellido)).expect("Error en agregar el estudiante");
+
+    
+    let message = Message{
+        message: String::from("Se creo al estudiante sin problemas")
+    };
+
+    Ok(Json(message)) 
 }
 
 /*
