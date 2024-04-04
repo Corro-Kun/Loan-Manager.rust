@@ -22,6 +22,7 @@ function App(){
           <Route path="/admin" element={<Admin />} />
           <Route path="/new/user" element={<CreateUser />} />
           <Route path="/new/item" element={<CreateItem />} />
+          <Route path="/new/student" element={<h2>Crear estudiante</h2>} />
           <Route path="/list/some" element={<ListAdmin />} />
         </Route>
         {/* Prestamista */}
