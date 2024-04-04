@@ -100,4 +100,10 @@ pub mod request_models{
         pub descripcion: String,
         pub file: TempFile<'r>,
     }
+
+    #[derive(Debug, Serialize, Deserialize)]
+    pub struct TeacherWithClass{
+        pub idprofesor: String,
+        pub idsalon: String
+    }
 }

@@ -221,6 +221,38 @@ pub fn post_teacher(teacher: Json<Profesor>) -> Result<Json<Message>, Custom<Jso
     Ok(Json(message)) 
 }
 
+#[post("/teacher/class", format = "application/json", data = "<teacher>")]
+pub fn post_teacher_class(teacher: Json<TeacherWithClass>) -> Result<Json<Message>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query_1 = format!("SELECT * FROM profesor where idprofesor='{}'", teacher.idprofesor);
+
+    let list_teacher: Vec<Profesor> = conn.query_map(&query_1, |(idprofesor, nombre, apellido)|{
+        Profesor{idprofesor, nombre, apellido}
+    }).expect("Ocurrio un error en la consulta");
+
+    if list_teacher.len() < 1{
+        let error = Error{error: String::from("No se encontro al profesor")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }
+
+    if list_teacher.len() >= 2{
+        let error = Error{error: String::from("No se identifica al profesor")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }
+
+    let query_2 = String::from("UPDATE salon SET idprofesor = ? WHERE idsalon = ?"); 
+
+    conn.exec_drop(&query_2, (&teacher.idprofesor, &teacher.idsalon)).expect("Error al guardar al profesor en esa clase");
+
+    let message = Message{
+        message: String::from("Se creo el profesor sin problemas")
+    };
+
+    Ok(Json(message)) 
+  
+}
+
 /*
 #[post("/upload", data = "<upload>")]
 pub async fn add_user(mut upload: Form<AddUser<'_>>) -> String{
