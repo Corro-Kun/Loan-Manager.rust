@@ -86,3 +86,14 @@ export async function postTeacherWithClass(data){
   });
   return await response.json();
 }
+
+export async function postStudent(data){
+  const response = await fetch(backend+"/student",{
+    method: "POST",
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}

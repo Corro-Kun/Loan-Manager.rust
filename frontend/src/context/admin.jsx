@@ -1,5 +1,5 @@
 import {useContext, createContext, useState} from "react";
-import {postCreateUser, postCreateItem, postCreateClass, getClassEmpty, postTeacher, postTeacherWithClass} from "../api/api.js";
+import {postCreateUser, postCreateItem, postCreateClass, getClassEmpty, postTeacher, postTeacherWithClass, postStudent} from "../api/api.js";
 import {useNavigate} from "react-router-dom";
 
 const ContextAdmin = createContext();
@@ -149,8 +149,19 @@ export function ProviderAdmin({children}){
     setUsuario({...usuario, idsalon: id});
   }
 
+  async function handleStudent(e){
+    e.preventDefault();
+    const data = await postStudent(usuario);
+    
+    if(data.error){
+      throw new Error(data.error);
+    }
+
+    navigate("/admin");
+  }
+
   return(
-    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload, changerCreation, profesor, changerClass, HandleClass, classEmpty, addClass}} >
+    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload, changerCreation, profesor, changerClass, HandleClass, classEmpty, addClass, handleStudent}} >
       {children}
     </ContextAdmin.Provider>
   );

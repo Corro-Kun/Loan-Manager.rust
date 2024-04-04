@@ -9,6 +9,7 @@ import ListAdmin from "./page/listAdmin.jsx";
 import {Toaster} from "sonner";
 import CreateItem from "./page/createItem.jsx";
 import Prestamista from "./page/prestamista.jsx";
+import CreateStudent from "./page/createStudent.jsx";
 
 function App(){
   return(
@@ -22,7 +23,7 @@ function App(){
           <Route path="/admin" element={<Admin />} />
           <Route path="/new/user" element={<CreateUser />} />
           <Route path="/new/item" element={<CreateItem />} />
-          <Route path="/new/student" element={<h2>Crear estudiante</h2>} />
+          <Route path="/new/student" element={<CreateStudent />} />
           <Route path="/list/some" element={<ListAdmin />} />
         </Route>
         {/* Prestamista */}
