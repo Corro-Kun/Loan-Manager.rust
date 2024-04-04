@@ -195,9 +195,30 @@ pub fn post_class(salon: Json<Salon>) -> Result<Json<Message>, Custom<Json<Error
     Ok(Json(message)) 
 }
 
-#[post("/teacher")]
-pub fn post_teacher(){
+#[post("/teacher", format = "application/json", data = "<teacher>")]
+pub fn post_teacher(teacher: Json<Profesor>) -> Result<Json<Message>, Custom<Json<Error>>>{
+    let mut conn = connect();
 
+    let query_1 = format!("SELECT * FROM profesor where idprofesor='{}'", teacher.idprofesor);
+
+    let list_teacher: Vec<Profesor> = conn.query_map(&query_1, |(idprofesor, nombre, apellido)|{
+        Profesor{idprofesor, nombre, apellido}
+    }).expect("Ocurrio un error en la consulta");
+
+    if list_teacher.len() >= 1{
+        let error = Error{error: String::from("Ya existe este profesor con ese ID")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }
+
+    let query_2 = String::from("insert into profesor(idprofesor, nombre, apellido) values (?,?,?)");
+
+    conn.exec_drop(&query_2, (&teacher.idprofesor, &teacher.nombre, &teacher.apellido)).expect("Error al crear al profesor");
+
+    let message = Message{
+        message: String::from("Se creo el profesor sin problemas")
+    };
+
+    Ok(Json(message)) 
 }
 
 /*
