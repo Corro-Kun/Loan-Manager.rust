@@ -1,5 +1,5 @@
 import {useContext, createContext, useState} from "react";
-import {postCreateUser, postCreateItem, postCreateClass, getClassEmpty} from "../api/api.js";
+import {postCreateUser, postCreateItem, postCreateClass, getClassEmpty, postTeacher, postTeacherWithClass} from "../api/api.js";
 import {useNavigate} from "react-router-dom";
 
 const ContextAdmin = createContext();
@@ -23,19 +23,45 @@ export function ProviderAdmin({children}){
 
   async function handleUsuario(e){
     e.preventDefault();
-    const form = new FormData();
-    form.append("idusuario", usuario.idusuario);
-    form.append("nombre", usuario.nombre);
-    form.append("apellido", usuario.apellido);
-    form.append("rol", 2);
-    form.append("contraseña", usuario.contraseña);
-    form.append("file", usuario.file);
-    const data = await postCreateUser(form);
-    if(data.error){
-      throw new Error(data.error);
+    if (!profesor){
+      const form = new FormData();
+      form.append("idusuario", usuario.idusuario);
+      form.append("nombre", usuario.nombre);
+      form.append("apellido", usuario.apellido);
+      form.append("rol", 2);
+      form.append("contraseña", usuario.contraseña);
+      form.append("file", usuario.file);
+      const data = await postCreateUser(form);
+      if(data.error){
+        throw new Error(data.error);
+      }
+      navigate("/admin");
+    }else{
+      let cache = {
+        idprofesor: usuario.idusuario,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+      }
+      const data = await postTeacher(cache);
+      if(data.error){
+        throw new Error(data.error);
+      }
+
+      if(usuario.idsalon){
+        console.log("entro");
+        let send ={
+          idprofesor: usuario.idusuario,
+          idsalon: usuario.idsalon
+        }
+        const data2 = await postTeacherWithClass(send);
+        if(data2.error){
+          throw new Error(data.error);
+        }
+      }
+      
+      navigate("/admin");
     }
-    navigate("/admin");
-  }
+ }
 
   const [item, setItem] = useState({});
 
@@ -111,11 +137,20 @@ export function ProviderAdmin({children}){
 
   async function getClassEmp(){
     const data = await getClassEmpty();
+    data.map((data)=> data.select = false);
     setClassEmpty(data);
   }
 
+  function addClass(id, i){
+    let cache = classEmpty;
+    cache.map((data)=> data.select = false);
+    cache[i].select = true;
+    setClassEmpty(cache);
+    setUsuario({...usuario, idsalon: id});
+  }
+
   return(
-    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload, changerCreation, profesor, changerClass, HandleClass, classEmpty}} >
+    <ContextAdmin.Provider value={{changerUsuario, handleUsuario, handleItem, changerItem, ImageDownload, changerCreation, profesor, changerClass, HandleClass, classEmpty, addClass}} >
       {children}
     </ContextAdmin.Provider>
   );

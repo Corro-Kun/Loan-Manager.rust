@@ -9,7 +9,7 @@ export default function NewUser(){
   const navigate = useNavigate(); 
   const inputImage = useRef(null);
   const [img, setImg] = useState("https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514693/77979774-dise%C3%B1o-gr%C3%A1fico-del-ejemplo-del-vector-del-icono-del-perfil-del-hombre-joven.jpg");
-  const {changerUsuario, handleUsuario, changerCreation, profesor, changerClass, HandleClass, classEmpty} = useAdmin();
+  const {changerUsuario, handleUsuario, changerCreation, profesor, changerClass, HandleClass, classEmpty, addClass} = useAdmin();
 
   return(
     <div className="NewUser-Render-Div" >
@@ -40,7 +40,7 @@ export default function NewUser(){
           </div>
           <div style={profesor? {display: "none"} : {}} className="NewUser-Input-Label" >
             <label>Contraseña</label>
-            <input type="password" required onChange={(e)=> changerUsuario(e)} name="contraseña"/>
+            <input type="password" required={!profesor} onChange={(e)=> changerUsuario(e)} name="contraseña"/>
           </div>
           <div className="NewUser-Buttons" >
             <button>Crear</button>
@@ -50,7 +50,7 @@ export default function NewUser(){
           <picture onClick={()=> inputImage.current.click()} >
             <img src={img} />
           </picture>
-          <input type="file" required style={{display: "none"}} ref={inputImage} name="file" onChange={(e)=> {
+          <input type="file" required={!profesor} style={{display: "none"}} ref={inputImage} name="file" onChange={(e)=> {
             setImg(URL.createObjectURL(e.target.files[0]));
             changerUsuario(e)}} />
         </div>
@@ -58,8 +58,8 @@ export default function NewUser(){
           <div className="NewUser-Class-Select" >
             <h3 style={{textAlign: "center", marginTop: "2px", color: "var(--Text_Color)"}} >Seleciona una clase (opcional)</h3>
             {
-              classEmpty?.map((data)=>(
-                <div>
+              classEmpty?.map((data, i)=>(
+                <div style={data.select? {backgroundColor: "var(--Main_Color)", color: "#fff"} : {}} onClick={()=> addClass(data.programa, i)} >
                   <p>{data.programa}</p>
                   <h3>{data.idsalon}</h3>
                 </div>

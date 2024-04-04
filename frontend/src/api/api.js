@@ -57,7 +57,32 @@ export async function postCreateClass(data){
   return await response.json();
 }
 
+// function for get empty class
+
 export async function getClassEmpty(){
   const response = await fetch(backend+"/class/empty");
+  return await response.json();
+}
+
+export async function postTeacher(data){
+  const response = await fetch(backend+"/teacher",{
+    method: "POST",
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
+}
+
+
+export async function postTeacherWithClass(data){
+  const response = await fetch(backend+"/teacher/class",{
+    method: "POST",
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  });
   return await response.json();
 }
