@@ -195,6 +195,11 @@ pub fn post_class(salon: Json<Salon>) -> Result<Json<Message>, Custom<Json<Error
     Ok(Json(message)) 
 }
 
+#[post("/teacher")]
+pub fn post_teacher(){
+
+}
+
 /*
 #[post("/upload", data = "<upload>")]
 pub async fn add_user(mut upload: Form<AddUser<'_>>) -> String{

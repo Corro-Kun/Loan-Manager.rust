@@ -16,6 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `estudiante`
+--
+
+DROP TABLE IF EXISTS `estudiante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `estudiante` (
+  `idestudiante` varchar(225) NOT NULL,
+  `nombre` varchar(225) NOT NULL,
+  `apellido` varchar(225) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estudiante`
+--
+
+LOCK TABLES `estudiante` WRITE;
+/*!40000 ALTER TABLE `estudiante` DISABLE KEYS */;
+/*!40000 ALTER TABLE `estudiante` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `horario`
 --
 
@@ -81,13 +104,16 @@ CREATE TABLE `prestamo` (
   `iditem` varchar(225) NOT NULL,
   `idsalon` varchar(225) NOT NULL,
   `estado` int(11) NOT NULL,
+  `idprofesor` varchar(225) DEFAULT NULL,
   PRIMARY KEY (`idprestamo`),
   KEY `idusuario` (`idusuario`),
   KEY `idsalon` (`idsalon`),
   KEY `iditem` (`iditem`),
+  KEY `idprofesor` (`idprofesor`),
   CONSTRAINT `prestamo_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`),
   CONSTRAINT `prestamo_ibfk_2` FOREIGN KEY (`idsalon`) REFERENCES `salon` (`idsalon`),
-  CONSTRAINT `prestamo_ibfk_3` FOREIGN KEY (`iditem`) REFERENCES `items` (`iditem`)
+  CONSTRAINT `prestamo_ibfk_3` FOREIGN KEY (`iditem`) REFERENCES `items` (`iditem`),
+  CONSTRAINT `prestamo_ibfk_4` FOREIGN KEY (`idprofesor`) REFERENCES `profesor` (`idprofesor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -111,7 +137,6 @@ CREATE TABLE `profesor` (
   `idprofesor` varchar(225) NOT NULL,
   `nombre` varchar(225) NOT NULL,
   `apellido` varchar(225) NOT NULL,
-  `imagen` varchar(225) DEFAULT NULL,
   PRIMARY KEY (`idprofesor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -176,7 +201,8 @@ CREATE TABLE `usuario` (
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` VALUES
-('1','admin','kun','http://localhost:8000/upload/predefault/admin.png',1,'MTIzNAoK');
+('1','admin','kun','http://localhost:8000/upload/predefault/admin.png',1,'MTIzNAoK'),
+('1075624153','kevin','pava','http://localhost:8000/upload/user/1075624153.png',2,'hola');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -189,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-25 16:48:02
+-- Dump completed on 2024-04-04 15:43:28

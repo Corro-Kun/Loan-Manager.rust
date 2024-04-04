@@ -24,15 +24,15 @@ pub mod data_base{
         idusuario: String,
         iditem: String,
         idsalon: String,
-        estado: i8
+        estado: i8,
+        idprofesor: String
     }
 
     #[derive(Debug, Serialize, Deserialize)]
     pub struct Profesor{
-        idprofesor: String,
-        nombre: String,
-        apellido: String,
-        imagen: String
+        pub idprofesor: String,
+        pub nombre: String,
+        pub apellido: String,
     }
 
     #[derive(Debug, Serialize, Deserialize, Clone)]
