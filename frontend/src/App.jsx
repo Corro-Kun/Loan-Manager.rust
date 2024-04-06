@@ -10,6 +10,7 @@ import {Toaster} from "sonner";
 import CreateItem from "./page/createItem.jsx";
 import Prestamista from "./page/prestamista.jsx";
 import CreateStudent from "./page/createStudent.jsx";
+import LendPage from "./page/LendPage.jsx";
 
 function App(){
   return(
@@ -29,6 +30,7 @@ function App(){
         {/* Prestamista */}
         <Route element={<RolPrestamista />} > 
           <Route path="/prestamista" element={<Prestamista />} />
+          <Route path="/gestion/prestamo" element={<LendPage />} />
         </Route>
       </Routes> 
     </BrowserRouter>

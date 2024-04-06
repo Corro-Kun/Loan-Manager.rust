@@ -1,0 +1,90 @@
+.Lend-Render{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Lend-Div{
+  height: 80%;
+  width: 60%;
+  border: 2px solid var(--Main_Color);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.Lend-Title{
+  height: 5%;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Lend-Title h1{
+  font-size: 1.8em;
+  transform: translateY(4px);
+  cursor: pointer;
+}
+
+.Lend-Title h1:hover{
+  color: var(--Main_Color);
+}
+
+.Lend-Users{
+  margin: 0 20px;
+  height: 50%;
+  display: flex;
+  border-bottom: 1px solid var(--Main_Color);
+}
+
+.Lend-Teacher{
+  height: 100%;
+  width: 50%;
+  border-right: 1px solid var(--Main_Color);
+}
+
+.Lend-Student{
+  height: 100%;
+  width: 50%;
+}
+
+.Lend-Ingrese-Studente{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Lend-Ingrese-Studente input{
+  width: 70%;
+  padding: 3px 4px;
+  font-size: 1.1em;
+  border: 1px solid var(--Main_Color);
+  border-radius: 5px;
+  outline: none;
+}
+
+.Lend-Ingrese-Studente button{
+  margin-top: 20px;
+  padding: 4px 10px;
+  background-color: var(--Bg_Color);
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: .3s;
+}
+
+.Lend-Ingrese-Studente button:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.Lend-Item{
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

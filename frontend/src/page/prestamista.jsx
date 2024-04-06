@@ -1,6 +1,8 @@
 import Body from "../components/Body/Body";
 import BodyMain from "../components/BodyMain/BodyMain"; 
+import ButtonImage from "../components/ButtonImage/ButtonImage.jsx";
 import CardProfile from "../components/CardProfile/CardProfile";
+import PanelMain from "../components/PanelMain/PanelMain.jsx";
 import {ProfileProvider} from "../context/profile.jsx";
 
 function Prestamista(){
@@ -10,6 +12,9 @@ function Prestamista(){
         <ProfileProvider>
           <CardProfile />
         </ProfileProvider>
+        <PanelMain>
+          <ButtonImage image={"https://cdn-icons-png.flaticon.com/512/15334/15334547.png"} title={"Prestar"} path={"/gestion/prestamo"}  />
+        </PanelMain>
       </BodyMain>
     </Body> 
   );
