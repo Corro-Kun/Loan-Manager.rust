@@ -15,6 +15,41 @@ use mysql::{prelude::Queryable, *};
 
 */
 
+#[get("/teacher")]
+pub fn get_teacher() -> Result<Json<Vec<Profesor>>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = String::from("SELECT * FROM profesor");
+
+    let list_teacher: Vec<Profesor> = conn.query_map(&query, |(idprofesor, nombre, apellido)|{
+        Profesor{idprofesor, nombre, apellido}
+    }).expect("Ocurrio un error en la consulta");
+
+    Ok(Json(list_teacher))
+}
+
+#[get("/teacher/<id>")]
+pub fn get_teacher_by_id(id: &str) -> Result<Json<Profesor>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = format!("SELECT * FROM profesor where idprofesor='{}'", id);
+
+    let teacher: Vec<Profesor> = conn.query_map(&query, |(idprofesor, nombre, apellido)|{
+        Profesor{idprofesor, nombre, apellido}
+    }).expect("Ocurrio un error");
+
+    if teacher.len() >= 2{
+        let error = Error{error: String::from("hay mas profesores con ese id")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }else if teacher.len() == 0{
+        let error = Error{error: String::from("No se encontro ningun profesor con ese id")};
+        return Err(Custom(Status::NotFound, Json(error)))
+    }
+
+    let one_teacher = teacher[0].clone();
+
+    Ok(Json(one_teacher))
+}
 
 #[post("/teacher", format = "application/json", data = "<teacher>")]
 pub fn post_teacher(teacher: Json<Profesor>) -> Result<Json<Message>, Custom<Json<Error>>>{

@@ -28,7 +28,7 @@ pub mod data_base{
         idprofesor: String
     }
 
-    #[derive(Debug, Serialize, Deserialize)]
+    #[derive(Debug, Serialize, Deserialize, Clone)]
     pub struct Profesor{
         pub idprofesor: String,
         pub nombre: String,
@@ -52,7 +52,7 @@ pub mod data_base{
         pub contraseña: String
     }
 
-    #[derive(Debug, Serialize, Deserialize)]
+    #[derive(Debug, Serialize, Deserialize, Clone)]
     pub struct Estudiante{
         pub idestudiante: String,
         pub nombre: String,

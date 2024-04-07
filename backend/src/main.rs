@@ -20,8 +20,8 @@ async fn rocket() -> _ {
                add_user, get_user, 
                post_item, get_item, 
                get_class_all,get_class_empty, post_class, 
-               post_teacher, post_teacher_class, 
-               post_student])
+               get_teacher, get_teacher_by_id , post_teacher, post_teacher_class, 
+               get_student, get_student_by_id ,post_student])
         .mount("/upload", FileServer::from("./upload"))
         .attach(CORS)
 }
