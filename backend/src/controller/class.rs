@@ -5,6 +5,18 @@ use rocket::http::Status;
 use rocket::serde::json::Json;
 use mysql::{prelude::Queryable, *};
 
+/* 
+    ROUTES AND FUCTION 
+
+    /class[get] (get_class_all): Retrieve the complete class.
+
+    /class/empty[get] (get_class_empty): Retrieve the class without teacher.
+
+    /class[post] (post_class): Create class without teacher.
+
+*/
+
+
 #[get("/class")]
 pub fn get_class_all() -> Result<Json<Vec<Salon>>, Custom<Json<Error>>>{
     let mut conn = connect();

@@ -5,6 +5,14 @@ use rocket::http::Status;
 use rocket::serde::json::Json;
 use mysql::{prelude::Queryable, *};
 
+/* 
+    ROUTES AND FUCTION 
+
+    /student[post] (post_student): Create student.
+
+*/
+
+
 #[post("/student", format = "application/json", data = "<student>")]
 pub fn post_student(student: Json<Estudiante>) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();

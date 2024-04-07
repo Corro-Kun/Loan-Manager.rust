@@ -6,6 +6,29 @@ use rocket::serde::json::Json;
 use rocket::form::Form;
 use mysql::{prelude::Queryable, *};
 
+
+/* 
+    ROUTES AND FUCTION 
+
+    /user[get] (get_user): Consult all users from the database.
+
+    /user[post] (add_user): Create a new user in the database.
+
+*/
+
+#[get("/user")]
+pub fn get_user() -> Result<Json<Vec<Usuario>>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = String::from("SELECT * FROM usuario");
+
+    let user: Vec<Usuario> = conn.query_map(&query, |(idusuario, nombre, apellido, imagen, rol, contraseña)|{
+        Usuario{idusuario, nombre, apellido, imagen, rol, contraseña}
+    }).expect("Ocurrio un error");
+
+    Ok(Json(user))
+}
+
 #[post("/user", data = "<usuario>")]
 pub async fn add_user(mut usuario: Form<AddUser<'_>>) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();
@@ -36,18 +59,4 @@ pub async fn add_user(mut usuario: Form<AddUser<'_>>) -> Result<Json<Message>, C
 
     Ok(Json(message))
 }
-
-#[get("/user")]
-pub fn get_user() -> Result<Json<Vec<Usuario>>, Custom<Json<Error>>>{
-    let mut conn = connect();
-
-    let query = String::from("SELECT * FROM usuario");
-
-    let user: Vec<Usuario> = conn.query_map(&query, |(idusuario, nombre, apellido, imagen, rol, contraseña)|{
-        Usuario{idusuario, nombre, apellido, imagen, rol, contraseña}
-    }).expect("Ocurrio un error");
-
-    Ok(Json(user))
-}
-
 

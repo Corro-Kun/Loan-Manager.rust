@@ -5,6 +5,17 @@ use rocket::http::Status;
 use rocket::serde::json::Json;
 use mysql::{prelude::Queryable, *};
 
+
+/* 
+    ROUTES AND FUCTION 
+
+    /teacher[post] (post_teacher): This router creates a new teacher in the database without assigning a class.
+
+    /teacher/class[post] (post_teacher_class): Assigning a class to for teacher.
+
+*/
+
+
 #[post("/teacher", format = "application/json", data = "<teacher>")]
 pub fn post_teacher(teacher: Json<Profesor>) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();

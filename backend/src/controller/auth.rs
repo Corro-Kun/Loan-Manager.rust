@@ -6,6 +6,16 @@ use rocket::http::Status;
 use rocket::serde::json::Json;
 use mysql::{prelude::Queryable, *};
 
+/* 
+    ROUTES AND FUCTION 
+
+    /login[post] (login): function for application login with rol such as admin, lenders
+
+    /profile[get] (profile): function to obtain the user profile
+
+*/
+
+
 #[post("/login", format = "application/json", data = "<login_data>")]
 pub fn login(login_data: Json<Login>) -> Result<Json<Id>,Custom<Json<Error>>>{
     let mut conn = connect();
