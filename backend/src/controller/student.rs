@@ -8,9 +8,9 @@ use mysql::{prelude::Queryable, *};
 /* 
     ROUTES AND FUCTION 
 
-    /student[get] (get_student): Consult all students of the database:
+    /student[get] (get_student): Consult all students of the database.
 
-    /student[get] (get_student_by_id): search for a student for their id in the database
+    /student[get] (get_student_by_id): search for a student for their id in the database.
 
     /student[post] (post_student): Create student.
 

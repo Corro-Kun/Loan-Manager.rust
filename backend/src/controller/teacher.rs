@@ -9,7 +9,9 @@ use mysql::{prelude::Queryable, *};
 /* 
     ROUTES AND FUCTION 
 
-    /teacher[post] (post_teacher): This router creates a new teacher in the database without assigning a class.
+    /teacher[get] (get_teacher): Consult all teacher of the database.
+
+    /teacher[post] (post_teacher): search for a teacher for their id in the database.
 
     /teacher/class[post] (post_teacher_class): Assigning a class to for teacher.
 
