@@ -57,7 +57,7 @@ pub fn get_class_everthing(id: &str) -> Result<Json<ClassComplet>, Custom<Json<E
         let error = Error{error: String::from("hay mas clases con ese id")};
         return Err(Custom(Status::Conflict, Json(error)))
     }else if data.len() == 0{
-        let error = Error{error: String::from("hay mas clases con ese id")};
+        let error = Error{error: String::from("No se encontro la clase")};
         return Err(Custom(Status::NotFound, Json(error)))
     }
 
