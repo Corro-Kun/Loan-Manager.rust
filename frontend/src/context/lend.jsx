@@ -1,5 +1,5 @@
 import {createContext, useContext, useState} from "react";
-import { getStudentById } from "../api/api";
+import { getClassComplet, getStudentById } from "../api/api";
 
 const ContextLend  = createContext();
 
@@ -16,7 +16,7 @@ export function ProviderLend({children}){
   }
 
   async function handleStudent(){
-    if (!student.idestudiante && student.idestudiante.length >=1){
+    if (student.idestudiante === undefined){
       throw new Error("No hay id del estudiante");
     }
     const data = await getStudentById(student.idestudiante);
@@ -40,10 +40,46 @@ export function ProviderLend({children}){
       data = JSON.parse(data);
       setApiStudent(data);
     }
+    data = localStorage.getItem("class");
+    if(data){
+      data = JSON.parse(data);
+      setClasss(data);
+      setHidenClass(false);
+    }
+  }
+
+  const [idclase, setIdclase] = useState({});
+
+  function changerClass({target:{name, value}}){
+    setIdclase({...idclase, [name]: value});
+  }
+
+  const [classs, setClasss] = useState({});
+  const [hidenClass, setHidenClass] = useState(true);
+
+  async function handleClass(){
+    if (idclase.idclase === undefined){
+      throw new Error("No hay id de la clase");
+    }
+    const data = await getClassComplet(idclase.idclase);
+
+    if (data.error){
+      throw new Error(data.error);
+    }
+
+    setClasss(data);
+    setHidenClass(false);
+    localStorage.setItem("class", JSON.stringify(data));
+  }
+
+  function deleteClass(){
+    localStorage.removeItem("class");
+    setHidenClass(true);
+    setClasss({});
   }
 
   return(
-    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave}} >
+    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass}} >
       {children}
     </ContextLend.Provider>
   );

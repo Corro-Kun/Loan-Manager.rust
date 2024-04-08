@@ -58,6 +58,15 @@
   justify-content: center;
 }
 
+.Lend-Ingrese-Studente select{
+  width: 20%;
+  margin-top: 10px;
+  padding: 4px 7px;
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid var(--Main_Color);
+}
+
 .Lend-Ingrese-Studente input{
   width: 70%;
   padding: 3px 4px;

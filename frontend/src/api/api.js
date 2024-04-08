@@ -102,3 +102,8 @@ export async function getStudentById(id){
   const response = await fetch(`${backend}/student/${id}`);
   return await response.json();
 }
+
+export async function getClassComplet(id){
+  const response = await fetch(`${backend}/class/complet/${id}`);
+  return await response.json();
+}

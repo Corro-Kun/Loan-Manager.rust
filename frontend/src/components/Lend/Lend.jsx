@@ -6,7 +6,7 @@ import {toast} from "sonner";
 import "./Lend.css";
 
 export default function Lend(){
-  const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave} = useLend();
+  const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass} = useLend();
 
   useEffect(()=>{
     getStudentSave();
@@ -21,17 +21,53 @@ export default function Lend(){
         </div>
         <div className="Lend-Users" >
           <div className="Lend-Teacher" >
+            <div className="Lend-Ingrese-Studente" style={hidenClass? {} : {display: "none"}} >
+              <input type="text" placeholder="id de la clase" name="idclase" onChange={(e)=> changerClass(e)} onKeyDown={(e)=>{if (e.key === "Enter"){
+                toast.promise(handleClass(),{
+                  success: "clase agregada",
+                  loading: "buscando clase...",
+                  error: (e)=> e
+                }); 
+              }}}  />
+              <select>
+                <option>clase</option>
+                <option>libre</option>
+              </select>
+              <button onClick={()=> toast.promise(handleClass(),{
+                success: "clase agregada",
+                loading: "buscando clase...",
+                error: (e)=> e
+              })} >Ingresar</button> 
+            </div>
+            <div className="Lend-Student-Active" style={classs.idsalon? {} : {display: "none"}} >
+              <div className="Lend-Student-Bar" >
+                <h2 style={{color: "transparent"}} ><HiTrash/></h2>
+                <h3>Clase & Profesor</h3>
+                <h2 onClick={()=> deleteClass()} ><HiTrash /></h2>
+              </div>
+              <div className="Lend-Student-Card" >
+                <picture>
+                  <img src="https://cdn-icons-png.flaticon.com/512/5609/5609505.png" />
+                </picture>
+                <h3>{classs?.programa}</h3>
+                <p>{classs?.nombre} {classs?.apellido}</p>
+              </div>
+            </div>
           </div> 
           <div className="Lend-Student" >
             <div className="Lend-Ingrese-Studente" style={apiStudent.idestudiante? {display: "none"} : {}} >
-              <input type="text" placeholder="id..." autoFocus name="idestudiante" onChange={(e)=> changerStudent(e)} onKeyDown={(e)=>{if (e.key === "Enter"){
+              <input type="text" placeholder="id del estudiante" autoFocus name="idestudiante" onChange={(e)=> changerStudent(e)} onKeyDown={(e)=>{if (e.key === "Enter"){
                 toast.promise(handleStudent(),{
                   success: "estudiante agregado",
                   loading: "buscando estudiante...",
                   error: (e)=> e
                 });
               }}} />
-              <button onClick={()=> handleStudent()} >Ingresar</button>
+              <button onClick={()=> toast.promise(handleStudent(),{
+                success: "estudiante agregado",
+                loading: "buscando estudiante",
+                error: (e) => e
+              })} >Ingresar</button>
             </div>
             <div className="Lend-Student-Active" style={apiStudent.idestudiante? {} : {display: "none"}} >
               <div className="Lend-Student-Bar" >
