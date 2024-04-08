@@ -97,3 +97,8 @@ export async function postStudent(data){
   });
   return await response.json();
 }
+
+export async function getStudentById(id){
+  const response = await fetch(`${backend}/student/${id}`);
+  return await response.json();
+}

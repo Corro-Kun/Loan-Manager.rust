@@ -26,6 +26,7 @@
   font-size: 1.8em;
   transform: translateY(4px);
   cursor: pointer;
+  transition: .3s;
 }
 
 .Lend-Title h1:hover{
@@ -80,6 +81,57 @@
 
 .Lend-Ingrese-Studente button:hover{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.Lend-Student-Active{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Lend-Student-Bar{
+  display: flex;
+  width: 95%;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Lend-Student-Bar h2{
+  cursor: pointer;
+  transition: .3s;
+}
+
+.Lend-Student-Bar h2:hover{
+  color: var(--Main_Color); 
+}
+
+.Lend-Student-Card{
+  display: flex;
+  padding: 20px 10px;
+  width: 50%;
+  height: 65%;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--Bg2_Color);
+  border-radius: 10px;
+}
+
+.Lend-Student-Card picture{
+  display: flex;
+  width: 90%;
+  height: 280px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.Lend-Student-Card img{
+  height: 280px;
 }
 
 .Lend-Item{

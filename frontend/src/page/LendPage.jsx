@@ -1,10 +1,13 @@
 import Body from "../components/Body/Body";
 import Lend from "../components/Lend/Lend";
+import { ProviderLend } from "../context/lend";
 
 function LendPage(){
   return(
     <Body>
-      <Lend />
+      <ProviderLend>
+        <Lend />
+      </ProviderLend>
     </Body>
   );
 }
