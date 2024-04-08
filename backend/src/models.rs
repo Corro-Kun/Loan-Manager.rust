@@ -77,6 +77,15 @@ pub mod response_models{
     pub struct Message{
         pub message: String
     }
+
+    #[derive(Debug, Serialize, Deserialize, Clone)]
+    pub struct ClassComplet{
+        pub idsalon: String,
+        pub programa: String,
+        pub idprofesor: String,
+        pub nombre: String,
+        pub apellido: String
+    }
 }
 
 pub mod request_models{

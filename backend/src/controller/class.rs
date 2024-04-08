@@ -43,6 +43,29 @@ pub fn get_class_empty() -> Result<Json<Vec<Salon>>, Custom<Json<Error>>>{
     Ok(Json(list_class))
 }
 
+#[get("/class/complet/<id>")]
+pub fn get_class_everthing(id: &str) -> Result<Json<ClassComplet>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = format!("SELECT salon.idsalon, salon.programa, profesor.idprofesor, profesor.nombre, profesor.apellido FROM salon JOIN profesor ON profesor.idprofesor = salon.idprofesor WHERE idsalon = '{}'", id);
+
+    let data = conn.query_map(&query, |(idsalon, programa, idprofesor, nombre, apellido)|{
+        ClassComplet{idsalon, programa, idprofesor, nombre, apellido}
+    }).expect("Ocurrio un error en la consulta");
+
+    if data.len() >= 2{
+        let error = Error{error: String::from("hay mas clases con ese id")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }else if data.len() == 0{
+        let error = Error{error: String::from("hay mas clases con ese id")};
+        return Err(Custom(Status::NotFound, Json(error)))
+    }
+
+    let one_data = data[0].clone();
+
+    Ok(Json(one_data))
+}
+
 #[post("/class", format = "application/json" ,data = "<salon>")]
 pub fn post_class(salon: Json<Salon>) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();
