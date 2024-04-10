@@ -1,0 +1,67 @@
+.ListAvaliable-Div{
+  height: 80%;
+  width: 50%;
+  border: 2px solid var(--Main_Color);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.ListAvaliable-Input{
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.ListAvaliable-Input input{
+  padding: 5px 3px;
+  width: 50%;
+  border: 1px solid var(--Main_Color);
+  outline: none;
+  border-radius: 5px;
+}
+
+.ListAvaliable-Content{
+  display: flex;
+  padding: 20px;
+  width: 96%;
+  height: 90%;
+  overflow: auto;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.ListAvaliable-Card{
+  display: flex;
+  height: 250px;
+  width: 210px;
+  border: 2px solid var(--Bg2_Color);
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.ListAvaliable-Card:hover{
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.ListAvaliable-Card picture{
+  display: flex;
+  height: 80%;
+  width: 90%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.ListAvaliable-Card h3{
+  margin-top: 10px;
+}
+
+.ListAvaliable-Card img{
+  height: 90%;
+}

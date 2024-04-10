@@ -1,6 +1,11 @@
+import BodyCenter from "../components/BodyCenter/BodyCenter";
+import ListAvaliable from "../components/ListAvailable/ListAvailable";
+
 function SelectItemPage(){
   return(
-   <h2>Seleciona un item</h2>
+    <BodyCenter>
+      <ListAvaliable />
+    </BodyCenter> 
   );
 }
 
