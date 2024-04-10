@@ -1,5 +1,7 @@
 import {createContext, useContext, useState} from "react";
-import { getClassComplet, getStudentById } from "../api/api";
+import {useNavigate} from "react-router-dom";
+import {toast} from "sonner";
+import { getClassComplet, getStudentById, getItemsNotLend } from "../api/api";
 
 const ContextLend  = createContext();
 
@@ -10,6 +12,7 @@ export const useLend = ()=>{
 export function ProviderLend({children}){
   const [student, setStudent] = useState({});
   const [apiStudent, setApiStudent] = useState({});
+  const navigate = useNavigate();
 
   function changerStudent({target:{name, value}}){
     setStudent({...student, [name]: value});
@@ -78,8 +81,32 @@ export function ProviderLend({children}){
     setClasss({});
   }
 
+  const [items, setItems] = useState([]);
+
+  async function getItems(){
+    const data = await getItemsNotLend();
+    setItems(data);
+  }
+
+  function saveItem(i){
+    localStorage.setItem("item", JSON.stringify(items[i])); 
+    toast.success("Item agregado");
+    navigate("/gestion/prestamo");
+  }
+
+  function searchItem({target:{value}}){
+    let a = "";
+    a.length
+    if (value.length >= 1){
+      let cache = items.filter((i)=> i.iditem.includes(value))
+      setItems(cache);
+    }else{
+      getItems();
+    }
+  }
+
   return(
-    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass}} >
+    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, items, getItems, searchItem, saveItem}} >
       {children}
     </ContextLend.Provider>
   );

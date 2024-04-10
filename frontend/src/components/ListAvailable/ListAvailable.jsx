@@ -1,19 +1,32 @@
+import {useEffect} from "react";
 import "./ListAvailable.css";
+import { useLend } from "../../context/lend";
 
 export default function ListAvaliable(){
+  const {items, getItems, searchItem, saveItem} = useLend();
+
+  useEffect(()=>{
+    getItems();
+  },[]);
+
   return(
     <div className="ListAvaliable-Div" >
       <div className="ListAvaliable-Input" >
-        <input type="text" placeholder="id" />
+        <input type="text" placeholder="id" onChange={(e)=> searchItem(e)} />
       </div>
       <div className="ListAvaliable-Content" >
-        <div className="ListAvaliable-Card" >
-          <picture>
-            <img src="https://cdn-icons-png.flaticon.com/512/2777/2777142.png" />
-          </picture>
-          <h3>hola</h3>
-        </div>
-      </div>
+        {
+          items.map((i, a)=> (
+            <div key={i.iditem} className="ListAvaliable-Card" onClick={()=> saveItem(a)} >
+              <picture>
+                <img src={i.imagen} />
+              </picture>
+              <p>{i.iditem}</p>
+              <h3>{i.nombre}</h3>
+            </div>
+          ))
+        }
+     </div>
     </div> 
   );
 }

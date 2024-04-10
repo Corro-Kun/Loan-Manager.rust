@@ -33,6 +33,7 @@
 
 .ListAvaliable-Card{
   display: flex;
+  padding: 10px 0;
   height: 250px;
   width: 210px;
   border: 2px solid var(--Bg2_Color);
@@ -50,18 +51,15 @@
 
 .ListAvaliable-Card picture{
   display: flex;
-  height: 80%;
+  height: 75%;
   width: 90%;
   overflow: hidden;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-}
-
-.ListAvaliable-Card h3{
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .ListAvaliable-Card img{
-  height: 90%;
+  height: 100%;
 }

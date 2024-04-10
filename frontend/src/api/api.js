@@ -107,3 +107,8 @@ export async function getClassComplet(id){
   const response = await fetch(`${backend}/class/complet/${id}`);
   return await response.json();
 }
+
+export async function getItemsNotLend(){
+  const response = await fetch(backend+"/item/notlend");
+  return await response.json();
+}
