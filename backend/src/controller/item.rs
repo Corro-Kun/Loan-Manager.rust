@@ -5,6 +5,9 @@ use rocket::http::Status;
 use rocket::serde::json::Json;
 use rocket::form::Form;
 use mysql::{prelude::Queryable, *};
+use chrono::{Utc, Local};
+use crate::middleware::ApiKey;
+
 
 
 /* 
@@ -76,3 +79,67 @@ pub async fn post_item(mut item: Form<AddItem<'_>>) -> Result<Json<Message>, Cus
     Ok(Json(message))
  }
 
+#[post("/lend",format = "application/json" ,data = "<prestamo>")]
+pub async fn post_lend(prestamo: Json<AddPrestamo>, token: ApiKey) -> Result<Json<Message>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query_verifc_1 = format!("select * from items where iditem='{}'", prestamo.iditem);
+
+    let items: Vec<Items> = conn.query_map(&query_verifc_1, |(iditem, nombre, descripcion, imagen)|{
+        Items{
+            iditem, nombre, descripcion, imagen
+        } 
+    }).expect("Ocurrio un error"); 
+
+    if items.len() >= 2{
+        let error = Error{error: String::from("Hay mas items con este id")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }else if items.len() == 0{
+        let error = Error{error: String::from("Item no encontrado")};
+        return Err(Custom(Status::NotFound, Json(error)))
+    }
+
+    let query_verifc_2 = format!("SELECT * FROM salon where idsalon='{}'", prestamo.idsalon);
+
+    let salon: Vec<Salon> = conn.query_map(&query_verifc_2, |(idsalon, programa, idprofesor)|{
+        Salon{idsalon, programa, idprofesor}
+    }).expect("Ocurrio un error");
+
+    if salon.len() >= 2{
+        let error = Error{error: String::from("Hay mas salones con este id")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }else if salon.len() == 0{
+        let error = Error{error: String::from("Salon no encontrado")};
+        return Err(Custom(Status::NotFound, Json(error)))
+    }
+
+    let query_verifc_3 = format!("SELECT * FROM profesor WHERE idprofesor='{}'", prestamo.idprofesor);
+
+    let profesores: Vec<Profesor> = conn.query_map(&query_verifc_3, |(idprofesor, nombre, apellido)|{
+        Profesor{idprofesor, nombre, apellido}
+    }).expect("Ocurrio un error en la consulta");
+
+    if profesores.len() >= 2{
+        let error = Error{error: String::from("Hay mas salones con este id")};
+        return Err(Custom(Status::Conflict, Json(error)))
+    }else if profesores.len() == 0{
+        let error = Error{error: String::from("Salon no encontrado")};
+        return Err(Custom(Status::NotFound, Json(error)))
+    }
+
+    let query = String::from("INSERT INTO prestamo(idusuario, iditem, idsalon, estado, idprofesor) values(?, ?, ?, ?, ?)");
+
+    conn.exec_drop(&query,(&token.to_string(), &prestamo.iditem, &prestamo.idsalon, 0, &prestamo.idprofesor)).expect("Ocurrio un error en el prestamo");
+
+    let id = conn.last_insert_id();
+
+    let query_1 = String::from("INSERT INTO historial(fecha, hora, estado, idprestamo) values(?, ?, ?, ?)");
+
+    conn.exec_drop(&query_1, (Utc::now().date_naive().to_string(), Local::now().time().to_string(), 0, &id)).expect("Error en guardar el historial");
+
+    let message = Message{
+        message: String::from("Prestamo realizado") 
+    };
+
+    Ok(Json(message))
+}

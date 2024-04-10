@@ -2,6 +2,7 @@ use rocket::http::Status;
 use rocket::request::{Outcome, Request, FromRequest};
 
 
+#[derive(Clone)]
 pub struct ApiKey(String);
 
 #[derive(Debug)]

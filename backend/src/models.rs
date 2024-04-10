@@ -122,4 +122,12 @@ pub mod request_models{
         pub idprofesor: String,
         pub idsalon: String
     }
+
+    #[derive(Debug, Serialize, Deserialize)]
+    pub struct AddPrestamo{
+        pub iditem: String,
+        pub idsalon: String,
+        pub idprofesor: String
+    }
+
 }
