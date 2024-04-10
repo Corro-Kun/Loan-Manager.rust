@@ -86,10 +86,14 @@ export default function Lend(){
           </div>
         </div>
         <div className="Lend-Item" >
-
+          <div className="Lend-item-Plus">
+            <picture>
+              <img src="https://cdn-icons-png.flaticon.com/512/7941/7941531.png" />
+            </picture> 
+          </div>
         </div>
         <div className="Lend-ButtonSubmit" >
-
+          <button>Prestar</button>
         </div>
       </div>
     </div>
