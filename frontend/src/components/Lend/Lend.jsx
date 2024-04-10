@@ -4,9 +4,11 @@ import { FaBackspace } from "react-icons/fa";
 import { HiTrash } from "react-icons/hi2";
 import {toast} from "sonner";
 import "./Lend.css";
+import {useNavigate} from "react-router-dom";
 
 export default function Lend(){
   const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass} = useLend();
+  const navigate = useNavigate();
 
   useEffect(()=>{
     getStudentSave();
@@ -86,7 +88,7 @@ export default function Lend(){
           </div>
         </div>
         <div className="Lend-Item" >
-          <div className="Lend-item-Plus">
+          <div className="Lend-item-Plus" onClick={()=> navigate("/gestion/prestamo/selecionar")} >
             <picture>
               <img src="https://cdn-icons-png.flaticon.com/512/7941/7941531.png" />
             </picture> 
