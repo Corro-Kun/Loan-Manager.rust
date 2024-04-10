@@ -1,7 +1,7 @@
 import {createContext, useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast} from "sonner";
-import { getClassComplet, getStudentById, getItemsNotLend } from "../api/api";
+import { getClassComplet, getStudentById, getItemsNotLend, postLend } from "../api/api";
 
 const ContextLend  = createContext();
 
@@ -49,7 +49,14 @@ export function ProviderLend({children}){
       setClasss(data);
       setHidenClass(false);
     }
+    data = localStorage.getItem("item");
+    if(data){
+      data = JSON.parse(data);
+      setItem(data);
+    }
   }
+
+  const [item, setItem] = useState({});
 
   const [idclase, setIdclase] = useState({});
 
@@ -105,8 +112,45 @@ export function ProviderLend({children}){
     }
   }
 
+  function deleteItem(){
+    localStorage.removeItem("item");
+    setItem({});
+  }
+
+  function deleteAll(){
+    deleteClass();
+    deleteStudent();
+    deleteItem();
+    toast.success("Operación cancelada");
+    navigate("/prestamista");
+  }
+
+
+  async function handleLend(){
+    if(item.iditem === undefined){
+      throw new Error("No hay item");
+    }else if(apiStudent.idestudiante === undefined){
+      throw new Error("No hay estudiante");
+    }else if(classs.idsalon === undefined){
+      throw new Error("No hay salon");
+    };
+
+    let data = {
+      "iditem": item.iditem,
+      "idsalon": classs.idsalon,
+      "idprofesor": classs.idprofesor
+    }
+
+    data = await postLend(data);
+    if (data.error){
+      throw new Error(data.error);
+    }
+    deleteAll();
+    navigate("/prestamista");
+  }
+
   return(
-    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, items, getItems, searchItem, saveItem}} >
+    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, items, getItems, searchItem, saveItem, item, deleteItem, deleteAll, handleLend}} >
       {children}
     </ContextLend.Provider>
   );

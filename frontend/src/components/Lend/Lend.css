@@ -190,3 +190,47 @@
   color: #fff;
   cursor: pointer;
 }
+
+.Lend-Item-Select{
+  display: flex;
+  height: 90%;
+  width: 20%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px; 
+  flex-direction: column;
+  border: 2px solid var(--Bg2_Color);
+}
+
+.Lend-Item-Select picture{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 65%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.Lend-Item-Select img{
+  height: 110%;
+}
+
+.Lend-Item-Select div{
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Lend-Item-Select h2{
+  cursor: pointer;
+  transition: .3s;
+}
+
+.Lend-Item-Select h2:hover{
+  color: var(--Main_Color);
+}

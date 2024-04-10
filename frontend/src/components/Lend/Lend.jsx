@@ -7,7 +7,7 @@ import "./Lend.css";
 import {useNavigate} from "react-router-dom";
 
 export default function Lend(){
-  const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass} = useLend();
+  const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, item, deleteItem, deleteAll, handleLend} = useLend();
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -19,7 +19,7 @@ export default function Lend(){
       <div className="Lend-Div" >
         <div className="Lend-Title" >
           <h2>Prestar</h2>
-          <h1><FaBackspace /></h1>
+          <h1 onClick={()=>deleteAll()} ><FaBackspace /></h1>
         </div>
         <div className="Lend-Users" >
           <div className="Lend-Teacher" >
@@ -88,14 +88,25 @@ export default function Lend(){
           </div>
         </div>
         <div className="Lend-Item" >
-          <div className="Lend-item-Plus" onClick={()=> navigate("/gestion/prestamo/selecionar")} >
+          <div className="Lend-item-Plus" style={item.iditem? {display: "none"} : {}} onClick={()=> navigate("/gestion/prestamo/selecionar")} >
             <picture>
               <img src="https://cdn-icons-png.flaticon.com/512/7941/7941531.png" />
             </picture> 
           </div>
+          <div className="Lend-Item-Select" style={item.iditem? {} : {display: "none"}} >
+            <div><h2 style={{color: "transparent"}} >x</h2><p>item a prestar</p><h2 onClick={()=> deleteItem()} ><HiTrash/></h2></div> 
+            <picture>
+              <img src={item?.imagen} />
+            </picture>
+            <h3>{item?.nombre}</h3>
+          </div>
         </div>
         <div className="Lend-ButtonSubmit" >
-          <button>Prestar</button>
+          <button onClick={()=> toast.promise(handleLend(),{
+            loading: "realizando el prestamo...",
+            success: "Prestamo realizado",
+            error: (e) => e
+          })} >Prestar</button>
         </div>
       </div>
     </div>

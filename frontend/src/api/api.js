@@ -112,3 +112,16 @@ export async function getItemsNotLend(){
   const response = await fetch(backend+"/item/notlend");
   return await response.json();
 }
+
+export async function postLend(data){
+  const response = await fetch(backend+"/lend", {
+    method: "POST",
+    headers:{
+      'Content-Type': 'application/json',
+      'token': localStorage.getItem("idBosque"),
+    },
+    body: JSON.stringify(data),
+  });
+
+  return await response.json();
+}
