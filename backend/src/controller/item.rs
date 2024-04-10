@@ -29,6 +29,19 @@ pub fn get_item() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
     Ok(Json(items))
 }
 
+#[get("/item/notlend")]
+pub fn get_item_not_lend() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = String::from("SELECT i.* FROM items i LEFT JOIN prestamo p ON i.iditem = p.iditem WHERE p.idprestamo IS NULL OR p.estado = 1;");
+
+    let items: Vec<Items> = conn.query_map(&query, |(iditem, nombre, descripcion, imagen)|{
+        Items{iditem, nombre, descripcion, imagen}
+    }).expect("Ocurrio un error en la consulta");
+
+    Ok(Json(items))
+}
+
 #[post("/item", data = "<item>")]
 pub async fn post_item(mut item: Form<AddItem<'_>>) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();
