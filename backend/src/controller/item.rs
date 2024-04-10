@@ -12,6 +12,8 @@ use mysql::{prelude::Queryable, *};
 
     /item[get] (get_item): Retrieve the complet items
 
+    /item/notlend[get] (get_item_not_lend): Return a Vec of items without lend.
+
     /item[post] (post_item): Create item.
 
 */
