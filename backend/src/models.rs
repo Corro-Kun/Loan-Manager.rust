@@ -86,6 +86,22 @@ pub mod response_models{
         pub nombre: String,
         pub apellido: String
     }
+
+    #[derive(Debug, Serialize, Deserialize, Clone)]
+    pub struct History{
+        pub fecha: String,
+        pub hora: String,
+        pub idusuario: String,
+        pub nombre_user: String,
+        pub imagen_user: String,
+        pub nombre_item: String,
+        pub imagen_item: String,
+        pub nombre_student: String,
+        pub apellido_student: String,
+        pub idsalon: String,
+        pub programa: String,
+        pub nombre_profesor: String,
+    }
 }
 
 pub mod request_models{
@@ -127,7 +143,8 @@ pub mod request_models{
     pub struct AddPrestamo{
         pub iditem: String,
         pub idsalon: String,
-        pub idprofesor: String
+        pub idprofesor: String,
+        pub idestudiante: String
     }
 
 }

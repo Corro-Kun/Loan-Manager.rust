@@ -25,7 +25,8 @@ DROP TABLE IF EXISTS `estudiante`;
 CREATE TABLE `estudiante` (
   `idestudiante` varchar(225) NOT NULL,
   `nombre` varchar(225) NOT NULL,
-  `apellido` varchar(225) DEFAULT NULL
+  `apellido` varchar(225) DEFAULT NULL,
+  PRIMARY KEY (`idestudiante`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,13 +40,13 @@ LOCK TABLES `estudiante` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `horario`
+-- Table structure for table `historial`
 --
 
-DROP TABLE IF EXISTS `horario`;
+DROP TABLE IF EXISTS `historial`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `horario` (
+CREATE TABLE `historial` (
   `idhorario` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
@@ -53,17 +54,17 @@ CREATE TABLE `horario` (
   `idprestamo` int(11) DEFAULT NULL,
   PRIMARY KEY (`idhorario`),
   KEY `idprestamo` (`idprestamo`),
-  CONSTRAINT `horario_ibfk_1` FOREIGN KEY (`idprestamo`) REFERENCES `prestamo` (`idprestamo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `historial_ibfk_1` FOREIGN KEY (`idprestamo`) REFERENCES `prestamo` (`idprestamo`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `horario`
+-- Dumping data for table `historial`
 --
 
-LOCK TABLES `horario` WRITE;
-/*!40000 ALTER TABLE `horario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `horario` ENABLE KEYS */;
+LOCK TABLES `historial` WRITE;
+/*!40000 ALTER TABLE `historial` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historial` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -105,16 +106,19 @@ CREATE TABLE `prestamo` (
   `idsalon` varchar(225) NOT NULL,
   `estado` int(11) NOT NULL,
   `idprofesor` varchar(225) DEFAULT NULL,
+  `idestudiante` varchar(225) NOT NULL,
   PRIMARY KEY (`idprestamo`),
   KEY `idusuario` (`idusuario`),
   KEY `idsalon` (`idsalon`),
   KEY `iditem` (`iditem`),
   KEY `idprofesor` (`idprofesor`),
+  KEY `idestudiante` (`idestudiante`),
   CONSTRAINT `prestamo_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`),
   CONSTRAINT `prestamo_ibfk_2` FOREIGN KEY (`idsalon`) REFERENCES `salon` (`idsalon`),
   CONSTRAINT `prestamo_ibfk_3` FOREIGN KEY (`iditem`) REFERENCES `items` (`iditem`),
-  CONSTRAINT `prestamo_ibfk_4` FOREIGN KEY (`idprofesor`) REFERENCES `profesor` (`idprofesor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `prestamo_ibfk_4` FOREIGN KEY (`idprofesor`) REFERENCES `profesor` (`idprofesor`),
+  CONSTRAINT `prestamo_ibfk_5` FOREIGN KEY (`idestudiante`) REFERENCES `estudiante` (`idestudiante`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,8 +205,7 @@ CREATE TABLE `usuario` (
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` VALUES
-('1','admin','kun','http://localhost:8000/upload/predefault/admin.png',1,'MTIzNAoK'),
-('1075624153','kevin','pava','http://localhost:8000/upload/user/1075624153.png',2,'hola');
+('1','admin','kun','http://localhost:8000/upload/predefault/admin.png',1,'MTIzNAoK');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -215,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-04 15:43:28
+-- Dump completed on 2024-04-11 12:49:43

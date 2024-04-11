@@ -47,6 +47,20 @@ pub fn get_item_not_lend() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
     Ok(Json(items))
 }
 
+#[get("/lend/history")]
+pub fn get_history() -> Result<Json<Vec<History>>, Custom<Json<Error>>> {
+    let mut conn = connect();
+
+    let query = String::from("SELECT h.hora, h.fecha, u.idusuario, u.nombre AS nombre_user, u.apellido AS apellido_user, u.imagen AS imagen_user, i.nombre AS nombre_item, i.imagen AS imagen_item, e.nombre AS nombre_student, e.apellido AS apellido_student, s.idsalon, s.programa, pr.nombre AS nombre_profesor, pr.apellido AS apellido_profesor FROM historial h JOIN prestamo p ON h.idprestamo = p.idprestamo JOIN usuario u ON p.idusuario = u.idusuario JOIN items i ON p.iditem = i.iditem JOIN estudiante e ON p.idestudiante = e.idestudiante JOIN salon s ON p.idsalon = s.idsalon JOIN profesor pr ON p.idprofesor = pr.idprofesor;");
+
+    let history = conn.query_map(&query, |(fecha, hora, idusuario, nombre_user, imagen_user, nombre_item, imagen_item, nombre_student, apellido_student, idsalon, programa, nombre_profesor)|{
+        History{fecha, hora, idusuario, nombre_user, imagen_user, nombre_item, imagen_item, nombre_student, apellido_student, idsalon, programa, nombre_profesor}
+    }).expect("Ocurrio un error en la consulta");
+
+    Ok(Json(history))
+}
+
+
 #[post("/item", data = "<item>")]
 pub async fn post_item(mut item: Form<AddItem<'_>>) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();
@@ -127,9 +141,9 @@ pub async fn post_lend(prestamo: Json<AddPrestamo>, token: ApiKey) -> Result<Jso
         return Err(Custom(Status::NotFound, Json(error)))
     }
 
-    let query = String::from("INSERT INTO prestamo(idusuario, iditem, idsalon, estado, idprofesor) values(?, ?, ?, ?, ?)");
+    let query = String::from("INSERT INTO prestamo(idusuario, iditem, idsalon, estado, idprofesor, idestudiante) values(?, ?, ?, ?, ?, ?)");
 
-    conn.exec_drop(&query,(&token.to_string(), &prestamo.iditem, &prestamo.idsalon, 0, &prestamo.idprofesor)).expect("Ocurrio un error en el prestamo");
+    conn.exec_drop(&query,(&token.to_string(), &prestamo.iditem, &prestamo.idsalon, 0, &prestamo.idprofesor, &prestamo.idestudiante)).expect("Ocurrio un error en el prestamo");
 
     let id = conn.last_insert_id();
 
