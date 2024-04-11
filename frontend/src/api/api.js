@@ -125,3 +125,8 @@ export async function postLend(data){
 
   return await response.json();
 }
+
+export async function getHistory(){
+  const response = await fetch(backend+"/lend/history");
+  return await response.json();
+}

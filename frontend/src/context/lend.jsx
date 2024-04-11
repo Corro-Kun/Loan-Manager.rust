@@ -138,14 +138,18 @@ export function ProviderLend({children}){
     let data = {
       "iditem": item.iditem,
       "idsalon": classs.idsalon,
-      "idprofesor": classs.idprofesor
+      "idprofesor": classs.idprofesor,
+      "idestudiante": apiStudent.idestudiante
     }
 
     data = await postLend(data);
     if (data.error){
       throw new Error(data.error);
     }
-    deleteAll();
+    deleteClass();
+    deleteStudent();
+    deleteItem();
+
     navigate("/prestamista");
   }
 
