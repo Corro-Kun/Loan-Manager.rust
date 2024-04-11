@@ -1,0 +1,46 @@
+.History-Render{
+  height: 80%;
+  width: 45%;
+  border: 2px solid var(--Main_Color);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.History-Bar{
+  margin: 5px 10px 5px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.History-Content{
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--Main_Color);
+}
+
+.History-Card{
+  display: flex;
+  margin: 10px 20px;
+  padding: 10px 5px;
+  height: 150px;
+  border-bottom: 1px solid var(--Bg2_Color);
+  overflow: hidden;
+}
+
+.History-Card picture {
+  width: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.History-Card img{
+  height: 115%;
+}
+
+.History-Text{
+  width: 64%;
+  padding: 0 10px;
+}

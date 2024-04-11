@@ -12,6 +12,7 @@ import Prestamista from "./page/prestamista.jsx";
 import CreateStudent from "./page/createStudent.jsx";
 import LendPage from "./page/LendPage.jsx";
 import SelectItemPage from "./page/SelectItemPage.jsx";
+import HistorePage from "./page/HistorePage.jsx";
 
 function App(){
   return(
@@ -33,6 +34,7 @@ function App(){
           <Route path="/prestamista" element={<Prestamista />} />
           <Route path="/gestion/prestamo" element={<LendPage />} />
           <Route path="/gestion/prestamo/selecionar" element={<SelectItemPage />} />
+          <Route path="/historial" element={<HistorePage />} />
         </Route>
       </Routes> 
     </BrowserRouter>
