@@ -51,10 +51,10 @@ pub fn get_item_not_lend() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
 pub fn get_history() -> Result<Json<Vec<History>>, Custom<Json<Error>>> {
     let mut conn = connect();
 
-    let query = String::from("SELECT h.hora, h.fecha, u.idusuario, u.nombre AS nombre_user, u.imagen AS imagen_user, i.nombre AS nombre_item, i.imagen AS imagen_item, e.nombre AS nombre_student, e.apellido AS apellido_student, s.idsalon, s.programa, pr.nombre AS nombre_profesor FROM historial h JOIN prestamo p ON h.idprestamo = p.idprestamo JOIN usuario u ON p.idusuario = u.idusuario JOIN items i ON p.iditem = i.iditem JOIN estudiante e ON p.idestudiante = e.idestudiante JOIN salon s ON p.idsalon = s.idsalon JOIN profesor pr ON p.idprofesor = pr.idprofesor;");
+    let query = String::from("SELECT h.hora, h.fecha, u.idusuario, u.nombre AS nombre_user, u.imagen AS imagen_user, i.nombre AS nombre_item, i.imagen AS imagen_item, e.nombre AS nombre_student, s.idsalon, s.programa, pr.nombre AS nombre_profesor, p.estado FROM historial h JOIN prestamo p ON h.idprestamo = p.idprestamo JOIN usuario u ON p.idusuario = u.idusuario JOIN items i ON p.iditem = i.iditem JOIN estudiante e ON p.idestudiante = e.idestudiante JOIN salon s ON p.idsalon = s.idsalon JOIN profesor pr ON p.idprofesor = pr.idprofesor;");
 
-    let history = conn.query_map(&query, |(fecha, hora, idusuario, nombre_user, imagen_user, nombre_item, imagen_item, nombre_student, apellido_student, idsalon, programa, nombre_profesor)|{
-        History{fecha, hora, idusuario, nombre_user, imagen_user, nombre_item, imagen_item, nombre_student, apellido_student, idsalon, programa, nombre_profesor}
+    let history = conn.query_map(&query, |(fecha, hora, idusuario, nombre_user, imagen_user, nombre_item, imagen_item, nombre_student, idsalon, programa, nombre_profesor, estado)|{
+        History{fecha, hora, idusuario, nombre_user, imagen_user, nombre_item, imagen_item, nombre_student, idsalon, programa, nombre_profesor, estado}
     }).expect("Ocurrio un error en la consulta");
 
     Ok(Json(history))

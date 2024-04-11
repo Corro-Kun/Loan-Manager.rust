@@ -97,10 +97,10 @@ pub mod response_models{
         pub nombre_item: String,
         pub imagen_item: String,
         pub nombre_student: String,
-        pub apellido_student: String,
         pub idsalon: String,
         pub programa: String,
         pub nombre_profesor: String,
+        pub estado: String
     }
 }
 
