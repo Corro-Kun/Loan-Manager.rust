@@ -1,0 +1,68 @@
+.ReturnDash-Panel{
+  height: 70%;
+  width: 40%;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  border: 2px solid var(--Main_Color);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba( 0, 0, 0, 0.2);
+}
+
+.ReturnDash-Title{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ReturnDash-Picture{
+  display: flex;
+  height: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.ReturnDash-Picture picture{
+  display: flex;
+  height: 90%;
+  width: 32%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--Main_Color);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.ReturnDash-Picture picture:hover{
+  box-shadow:  0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.ReturnDash-Picture img{
+  height: 100%;
+}
+
+.ReturnDash-Button{
+  width: 100%;
+  height: 7%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ReturnDash-Button button{
+  padding: 5px 10px;
+  background-color: var(--Main_Color);
+  color: var(--Text_Color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  translate: .3s;
+}
+
+.ReturnDash-Button button:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
