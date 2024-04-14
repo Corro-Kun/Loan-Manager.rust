@@ -18,14 +18,14 @@ pub mod data_base{
         pub imagen: String
     }
 
-    #[derive(Debug, Serialize, Deserialize)]
+    #[derive(Debug, Serialize, Deserialize, Clone)]
     pub struct Prestamo{
-        idprestamo: i64,
-        idusuario: String,
-        iditem: String,
-        idsalon: String,
-        estado: i8,
-        idprofesor: String
+        pub idprestamo: i64,
+        pub idusuario: String,
+        pub iditem: String,
+        pub idsalon: String,
+        pub estado: i8,
+        pub idprofesor: String
     }
 
     #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -101,6 +101,15 @@ pub mod response_models{
         pub programa: String,
         pub nombre_profesor: String,
         pub estado: String
+    }
+
+    #[derive(Debug, Serialize, Deserialize, Clone)]
+    pub struct ItemsLend{
+        pub iditem: String,
+        pub nombre: String,
+        pub descripcion: String,
+        pub imagen: String,
+        pub idprestamo: i64
     }
 }
 

@@ -47,6 +47,21 @@ pub fn get_item_not_lend() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
     Ok(Json(items))
 }
 
+#[get("/item/lend")]
+pub fn get_item_lend() -> Result<Json<Vec<ItemsLend>>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query = String::from("SELECT i.*, p.idprestamo FROM items i LEFT JOIN prestamo p ON i.iditem = p.iditem WHERE p.idprestamo IS NOT NULL OR p.estado = 0;");
+
+    let items: Vec<ItemsLend> = conn.query_map(&query, |(iditem, nombre, descripcion, imagen, idprestamo)|{
+        ItemsLend{iditem, nombre, descripcion, imagen, idprestamo}
+    }).expect("Ocurrio un error en la consulta");
+
+    Ok(Json(items))
+}
+
+
+
 #[get("/lend/history")]
 pub fn get_history() -> Result<Json<Vec<History>>, Custom<Json<Error>>> {
     let mut conn = connect();
@@ -153,6 +168,32 @@ pub async fn post_lend(prestamo: Json<AddPrestamo>, token: ApiKey) -> Result<Jso
 
     let message = Message{
         message: String::from("Prestamo realizado") 
+    };
+
+    Ok(Json(message))
+}
+
+#[put("/lend/<id>")]
+pub async fn put_lend(id: String) -> Result<Json<Message>, Custom<Json<Error>>>{
+    let mut conn = connect();
+
+    let query_1 = format!("SELECT * FROM prestamo where idprestamo={};", id);
+
+    let list_lend = conn.query_map(&query_1, |(idprestamo, idusuario, iditem, idsalon, estado, idprofesor)|{
+        Prestamo{idprestamo, idusuario, iditem, idsalon, estado, idprofesor}
+    }).expect("Ocurrio un error en la consulta");
+
+    if list_lend.len() == 0{
+        let error = Error{error: String::from("prestamo no encontrado")};
+        return Err(Custom(Status::NotFound, Json(error)))
+    }
+
+    let query_2 = String::from("UPDATE prestamo SET estado = 1 WHERE idprestamo = ?");
+
+    conn.exec_drop(&query_2, (&id,)).expect("Error en guardar el prestamo");
+
+    let message = Message{
+        message: String::from("Se a devuelto el item") 
     };
 
     Ok(Json(message))
