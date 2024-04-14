@@ -130,3 +130,13 @@ export async function getHistory(){
   const response = await fetch(backend+"/lend/history");
   return await response.json();
 }
+
+export async function getLendAll(){
+  const response = await fetch(backend+"/item/lend");
+  return await response.json();
+}
+
+export async function putLend(id){
+  const response = await fetch(backend+"/lend/"+id);
+  return await response.json();
+}

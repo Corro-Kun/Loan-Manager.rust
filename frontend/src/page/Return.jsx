@@ -1,10 +1,13 @@
 import BodyCenter from "./../components/BodyCenter/BodyCenter";
 import ReturnDash from "../components/ReturnDash/ReturnDash";
+import {ProviderReturnLend} from "../context/returnLend";
 
 function Return(){
   return(
     <BodyCenter>
-      <ReturnDash />
+      <ProviderReturnLend>
+        <ReturnDash />
+      </ProviderReturnLend>
     </BodyCenter>
   );
 }

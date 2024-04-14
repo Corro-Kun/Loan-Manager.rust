@@ -1,17 +1,30 @@
+import {useEffect} from "react";
+import {useReturnLend} from "../../context/returnLend";
+
 export default function ListLend(){
+  const {getItem, item, searchItem, saveItem} = useReturnLend();
+
+  useEffect(()=>{
+    getItem();
+  },[]);
+
   return(
     <div className="ListAvaliable-Div" >
       <div className="ListAvaliable-Input" >
-        <input type="text" placeholder="id" onChange={(e)=> null} />
+        <input type="text" placeholder="id" onChange={(e)=> searchItem(e)} />
       </div>
       <div className="ListAvaliable-Content" >
-            <div className="ListAvaliable-Card" onClick={()=> null} >
+        {
+          item.map((data, i)=>(
+            <div key={i} className="ListAvaliable-Card" onClick={()=> saveItem(i)} >
               <picture>
-                <img src="" />
+                <img src={data?.imagen} />
               </picture>
-              <p></p>
-              <h3></h3>
+              <p>{data?.iditem}</p>
+              <h3>{data?.nombre}</h3>
             </div>
+          ))
+        }
      </div>
     </div> 
   );
