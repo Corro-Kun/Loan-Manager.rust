@@ -174,10 +174,12 @@ pub async fn post_lend(prestamo: Json<AddPrestamo>, token: ApiKey) -> Result<Jso
 }
 
 #[put("/lend/<id>")]
-pub async fn put_lend(id: String) -> Result<Json<Message>, Custom<Json<Error>>>{
+pub async fn put_lend(id: &str) -> Result<Json<Message>, Custom<Json<Error>>>{
     let mut conn = connect();
 
-    let query_1 = format!("SELECT * FROM prestamo where idprestamo={};", id);
+    /*
+
+    let query_1 = format!("SELECT * FROM prestamo where idprestamo='{}';", id);
 
     let list_lend = conn.query_map(&query_1, |(idprestamo, idusuario, iditem, idsalon, estado, idprofesor)|{
         Prestamo{idprestamo, idusuario, iditem, idsalon, estado, idprofesor}
@@ -188,9 +190,19 @@ pub async fn put_lend(id: String) -> Result<Json<Message>, Custom<Json<Error>>>{
         return Err(Custom(Status::NotFound, Json(error)))
     }
 
+    */
+
     let query_2 = String::from("UPDATE prestamo SET estado = 1 WHERE idprestamo = ?");
 
     conn.exec_drop(&query_2, (&id,)).expect("Error en guardar el prestamo");
+
+    let id = conn.last_insert_id();
+
+    let query_1 = String::from("INSERT INTO historial(fecha, hora, estado, idprestamo) values(?, ?, ?, ?)");
+
+    conn.exec_drop(&query_1, (Utc::now().date_naive().to_string(), Local::now().time().to_string(), 1, &id)).expect("Error en guardar el historial");
+
+
 
     let message = Message{
         message: String::from("Se a devuelto el item") 
