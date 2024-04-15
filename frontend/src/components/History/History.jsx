@@ -24,14 +24,22 @@ export default function History(){
       </div>
       <div className="History-Content" >
         {
-          history.map((data)=>(
-          <div className="History-Card">
+          history.map((data, i)=>(
+          <div key={i} className="History-Card">
             <picture>
+              { data?.estado === "0" ?
               <img src={data?.imagen_user} />
+              :
+              <img src="https://cdn-icons-png.flaticon.com/512/11373/11373793.png" />
+              }
             </picture>
             <div className="History-Text" >
-              <p  style={{marginBottom: "10px"}} >{data?.hora} {data?.fecha}</p>
+              <p  style={{marginBottom: "10px"}} >{data?.hora} {data?.fecha} {data?.estado === "0" ? <samp>préstamo</samp> : <samp>devuelto</samp>} </p>
+              { data?.estado === "0" ?
               <p>El usuario <b>{data?.nombre_user}</b> informa que el artículo <b>{data?.nombre_item}</b> ha sido prestado al estudiante <b>{data?.nombre_student}</b> en el salón <b>{data?.idsalon}</b>. Este préstamo ha sido solicitado por el profesor <b>{data?.nombre_profesor}</b> en el programa <b>{data?.programa}</b>.</p>
+              :
+              <p>El Artículo <b>{data?.nombre_item}</b> que presto el usuario <b>{data?.nombre_user}</b> ha sido devuelto en perfectas condiciones después de ser prestado al estudiante <b>{data?.nombre_student}</b> en el salón <b>{data?.idsalon}</b> encargado por el profesor <b>{data?.nombre_profesor}</b> en el programa <b>{data?.programa}</b>.</p>
+              }
             </div>
             <picture>
               <img src={data?.imagen_item} />
