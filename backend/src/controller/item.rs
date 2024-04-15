@@ -51,7 +51,7 @@ pub fn get_item_not_lend() -> Result<Json<Vec<Items>>, Custom<Json<Error>>>{
 pub fn get_item_lend() -> Result<Json<Vec<ItemsLend>>, Custom<Json<Error>>>{
     let mut conn = connect();
 
-    let query = String::from("SELECT i.*, p.idprestamo FROM items i LEFT JOIN prestamo p ON i.iditem = p.iditem WHERE p.idprestamo IS NOT NULL OR p.estado = 0;");
+    let query = String::from("SELECT i.*, p.idprestamo FROM items i LEFT JOIN prestamo p ON i.iditem = p.iditem WHERE p.estado = 0;");
 
     let items: Vec<ItemsLend> = conn.query_map(&query, |(iditem, nombre, descripcion, imagen, idprestamo)|{
         ItemsLend{iditem, nombre, descripcion, imagen, idprestamo}
