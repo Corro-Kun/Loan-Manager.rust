@@ -51,8 +51,16 @@ export function ProviderReturnLend({children}){
     navigate("/prestamista");
   }
 
+  async function updateReturn(){
+    if(itemR.iditem === undefined){
+      throw new Error("No hay item a devolver");
+    }
+    await putLend(itemR.idprestamo);
+    quiteReturn();
+  }
+
   return(
-    <ContextReturn.Provider value={{getItem, item, searchItem, saveItem, itemR, getData, quiteReturn}} >
+    <ContextReturn.Provider value={{getItem, item, searchItem, saveItem, itemR, getData, quiteReturn, updateReturn}} >
       {children}
     </ContextReturn.Provider>
   );

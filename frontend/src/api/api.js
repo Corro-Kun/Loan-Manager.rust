@@ -137,6 +137,8 @@ export async function getLendAll(){
 }
 
 export async function putLend(id){
-  const response = await fetch(backend+"/lend/"+id);
+  const response = await fetch(backend+"/lend/"+id,{
+    method: "PUT"
+  });
   return await response.json();
 }

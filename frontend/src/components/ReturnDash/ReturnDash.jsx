@@ -3,10 +3,11 @@ import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useReturnLend} from "../../context/returnLend";
 import { IoMdCloseCircle } from "react-icons/io";
+import {toast} from "sonner";
 
 export default function ReturnDash(){
   const navegate = useNavigate();
-  const {itemR, getData, quiteReturn} = useReturnLend();
+  const {itemR, getData, quiteReturn, updateReturn} = useReturnLend();
 
   useEffect(()=>{
     getData();
@@ -37,7 +38,11 @@ export default function ReturnDash(){
           </div>
       }
       <div className="ReturnDash-Button" >
-        <button>Devolver</button>
+        <button onClick={()=> toast.promise(updateReturn(), {
+          loading: "devolviendo item...",
+          success: "objeto devuelto",
+          error: (e) => e
+        })} >Devolver</button>
       </div>
     </div>
   );
