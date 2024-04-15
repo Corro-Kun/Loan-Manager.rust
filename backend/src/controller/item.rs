@@ -196,12 +196,9 @@ pub async fn put_lend(id: &str) -> Result<Json<Message>, Custom<Json<Error>>>{
 
     conn.exec_drop(&query_2, (&id,)).expect("Error en guardar el prestamo");
 
-    let id = conn.last_insert_id();
-
     let query_1 = String::from("INSERT INTO historial(fecha, hora, estado, idprestamo) values(?, ?, ?, ?)");
 
     conn.exec_drop(&query_1, (Utc::now().date_naive().to_string(), Local::now().time().to_string(), 1, &id)).expect("Error en guardar el historial");
-
 
 
     let message = Message{
