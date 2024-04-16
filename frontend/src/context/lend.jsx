@@ -153,8 +153,18 @@ export function ProviderLend({children}){
     navigate("/prestamista");
   }
 
+  const [free, setFree] = useState(false);
+
+  function changerOptions({target:{value}}){
+    if (value === 0){
+      setFree(false);
+    }else{
+      setFree(true);
+    }
+  }
+
   return(
-    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, items, getItems, searchItem, saveItem, item, deleteItem, deleteAll, handleLend}} >
+    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, items, getItems, searchItem, saveItem, item, deleteItem, deleteAll, handleLend, free, changerOptions}} >
       {children}
     </ContextLend.Provider>
   );

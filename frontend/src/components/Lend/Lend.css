@@ -51,11 +51,27 @@
   width: 50%;
 }
 
+.Lend-Ingrese-Class{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .Lend-Ingrese-Studente{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.Lend-Ingrese-Class select{
+  width: 20%;
+  margin-top: 10px;
+  padding: 4px 7px;
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid var(--Main_Color);
 }
 
 .Lend-Ingrese-Studente select{
@@ -67,6 +83,15 @@
   border: 1px solid var(--Main_Color);
 }
 
+.Lend-Ingrese-Class input{
+  width: 70%;
+  padding: 3px 4px;
+  font-size: 1.1em;
+  border: 1px solid var(--Main_Color);
+  border-radius: 5px;
+  outline: none;
+}
+
 .Lend-Ingrese-Studente input{
   width: 70%;
   padding: 3px 4px;
@@ -74,6 +99,18 @@
   border: 1px solid var(--Main_Color);
   border-radius: 5px;
   outline: none;
+}
+
+.Lend-Ingrese-Class button{
+  margin-top: 20px;
+  padding: 4px 10px;
+  background-color: var(--Bg_Color);
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: .3s;
 }
 
 .Lend-Ingrese-Studente button{
@@ -86,6 +123,10 @@
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: .3s;
+}
+
+.Lend-Ingrese-Class button:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .Lend-Ingrese-Studente button:hover{

@@ -23,7 +23,8 @@ export default function Lend(){
         </div>
         <div className="Lend-Users" >
           <div className="Lend-Teacher" >
-            <div className="Lend-Ingrese-Studente" style={hidenClass? {} : {display: "none"}} >
+            <div  style={hidenClass? {} : {display: "none"}} >
+              <div className="Lend-Ingrese-Class" >
               <input type="text" placeholder="id de la clase" name="idclase" onChange={(e)=> changerClass(e)} onKeyDown={(e)=>{if (e.key === "Enter"){
                 toast.promise(handleClass(),{
                   success: "clase agregada",
@@ -31,15 +32,16 @@ export default function Lend(){
                   error: (e)=> e
                 }); 
               }}}  />
-              <select>
-                <option>clase</option>
-                <option>libre</option>
+              <select onChange={(e)=>console.log(e.target.value)} >
+                <option value={0} >clase</option>
+                <option value={1} >libre</option>
               </select>
               <button onClick={()=> toast.promise(handleClass(),{
                 success: "clase agregada",
                 loading: "buscando clase...",
                 error: (e)=> e
               })} >Ingresar</button> 
+              </div>
             </div>
             <div className="Lend-Student-Active" style={classs.idsalon? {} : {display: "none"}} >
               <div className="Lend-Student-Bar" >
