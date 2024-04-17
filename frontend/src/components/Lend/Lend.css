@@ -275,3 +275,47 @@
 .Lend-Item-Select h2:hover{
   color: var(--Main_Color);
 }
+
+.Lend-Teacher-Free{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Lend-Teacher-Free-Div{
+  width: 70%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.Lend-Teacher-Free-Div input{
+  padding: 4px 3px;
+  width: 100%;
+  margin-bottom: 5px;
+  border: 1px solid var(--Main_Color);
+  border-radius: 5px;
+  outline: none;
+}
+
+.Lend-Teacher-Free-Div select{
+  padding: 4px 2px;
+  width: 30%;
+  border-radius: 4px;
+}
+.Lend-Teacher-Free-Changer{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.Lend-Teacher-Free-Changer select{
+  padding: 4px 2px;
+  width: 20%;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid var(--Main_Color);
+}

@@ -7,7 +7,7 @@ import "./Lend.css";
 import {useNavigate} from "react-router-dom";
 
 export default function Lend(){
-  const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, item, deleteItem, deleteAll, handleLend, free, changerOptions} = useLend();
+  const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, item, deleteItem, deleteAll, handleLend, free, changerOptions, teacher, salon, changerData} = useLend();
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -42,25 +42,35 @@ export default function Lend(){
                 error: (e)=> e
               })} >Ingresar</button> 
               </div>
-              <div style={free? {} : {display:"none"}} >
-                <div>
+              <div className="Lend-Teacher-Free" style={free? {} : {display:"none"}} >
+                <div className="Lend-Teacher-Free-Div" >
                   <label>Profesor</label>
                   <input type="text" />
-                  <select>
-                    <option>prueba</option>
+                  <select name="profesor" onChange={(e)=> changerData(e)} >
+                    {
+                      teacher?.map((data, i)=>(
+                        <option key={i} value={data?.idprofesor} >{data?.nombre} {data?.apellido}</option>
+                      ))
+                    }
                   </select>
                 </div>
-                <div>
+                <div className="Lend-Teacher-Free-Div"  >
                   <label>Salon</label>
                   <input type="text" />
-                  <select>
-                    <option>prueba</option>
+                  <select name="salon" onChange={(e)=> changerData(e)} >
+                    {
+                      salon?.map((data, i)=>(
+                        <option key={i} value={data?.programa} >{data?.programa}</option>
+                      ))
+                    }
                   </select>
                 </div>
+                <div className="Lend-Teacher-Free-Changer">
                 <select onChange={(e)=>changerOptions(e)} >
                   <option value={1} >libre</option>
                   <option value={0} >clase</option>
                 </select>
+                </div>
               </div>
             </div>
             <div className="Lend-Student-Active" style={classs.idsalon? {} : {display: "none"}} >

@@ -142,3 +142,13 @@ export async function putLend(id){
   });
   return await response.json();
 }
+
+export async function getSalon(){
+  const response = await fetch(backend+"/class")
+  return await response.json();
+}
+
+export async function getTeacher(){
+  const response = await fetch(backend+"/teacher");
+  return await response.json();
+}

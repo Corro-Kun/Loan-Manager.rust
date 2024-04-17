@@ -1,7 +1,7 @@
 import {createContext, useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast} from "sonner";
-import { getClassComplet, getStudentById, getItemsNotLend, postLend } from "../api/api";
+import { getClassComplet, getStudentById, getItemsNotLend, postLend, getTeacher, getSalon } from "../api/api";
 
 const ContextLend  = createContext();
 
@@ -131,21 +131,41 @@ export function ProviderLend({children}){
       throw new Error("No hay item");
     }else if(apiStudent.idestudiante === undefined){
       throw new Error("No hay estudiante");
-    }else if(classs.idsalon === undefined){
-      throw new Error("No hay salon");
-    };
-
-    let data = {
-      "iditem": item.iditem,
-      "idsalon": classs.idsalon,
-      "idprofesor": classs.idprofesor,
-      "idestudiante": apiStudent.idestudiante
     }
 
-    data = await postLend(data);
-    if (data.error){
-      throw new Error(data.error);
+    if(free){
+      if(dataExtra.salon === undefined && dataExtra.profesor === undefined){
+        throw new Error("No hay selecionado todas las opciones");
+      }
+      let data = {
+        "iditem": item.iditem,
+        "idsalon": dataExtra.salon,
+        "idprofesor": dataExtra.profesor,
+        "idestudiante": apiStudent.idestudiante
+      }
+
+      data = await postLend(data);
+      if (data.error){
+        throw new Error(data.error);
+      }
+    }else{
+      if(classs.idsalon === undefined){
+        throw new Error("No hay salon");
+      };
+
+      let data = {
+        "iditem": item.iditem,
+        "idsalon": classs.idsalon,
+        "idprofesor": classs.idprofesor,
+        "idestudiante": apiStudent.idestudiante
+      }
+
+      data = await postLend(data);
+      if (data.error){
+        throw new Error(data.error);
+      }
     }
+
     deleteClass();
     deleteStudent();
     deleteItem();
@@ -156,16 +176,37 @@ export function ProviderLend({children}){
   const [free, setFree] = useState(false);
 
   function changerOptions({target:{value}}){
-    console.log(value);
     if (value === "0"){
       setFree(false);
     }else{
       setFree(true);
+      getAllTeacher();
+      getAllClass();
     }
   }
 
+  const [teacher, setTeacher] = useState([]);
+
+  async function getAllTeacher(){
+    const data = await getTeacher();
+    setTeacher(data);
+  }
+
+  const [salon, setSalon] = useState([]);
+
+  async function getAllClass(){
+    const data = await getSalon();
+    setSalon(data);
+  }
+
+  const [dataExtra, setDataExtra] = useState({});
+
+  async function changerData({target:{name, value}}){
+    setDataExtra({...dataExtra, [name]: value});
+  }
+
   return(
-    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, items, getItems, searchItem, saveItem, item, deleteItem, deleteAll, handleLend, free, changerOptions}} >
+    <ContextLend.Provider value={{changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, items, getItems, searchItem, saveItem, item, deleteItem, deleteAll, handleLend, free, changerOptions, teacher, salon, changerData}} >
       {children}
     </ContextLend.Provider>
   );
