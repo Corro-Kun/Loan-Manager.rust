@@ -156,7 +156,8 @@ export function ProviderLend({children}){
   const [free, setFree] = useState(false);
 
   function changerOptions({target:{value}}){
-    if (value === 0){
+    console.log(value);
+    if (value === "0"){
       setFree(false);
     }else{
       setFree(true);

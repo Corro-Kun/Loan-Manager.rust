@@ -7,7 +7,7 @@ import "./Lend.css";
 import {useNavigate} from "react-router-dom";
 
 export default function Lend(){
-  const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, item, deleteItem, deleteAll, handleLend} = useLend();
+  const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, item, deleteItem, deleteAll, handleLend, free, changerOptions} = useLend();
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -23,8 +23,8 @@ export default function Lend(){
         </div>
         <div className="Lend-Users" >
           <div className="Lend-Teacher" >
-            <div  style={hidenClass? {} : {display: "none"}} >
-              <div className="Lend-Ingrese-Class" >
+            <div style={hidenClass? {} : {display: "none"}} >
+              <div className="Lend-Ingrese-Class" style={free? {display: "none"} : {}} >
               <input type="text" placeholder="id de la clase" name="idclase" onChange={(e)=> changerClass(e)} onKeyDown={(e)=>{if (e.key === "Enter"){
                 toast.promise(handleClass(),{
                   success: "clase agregada",
@@ -32,7 +32,7 @@ export default function Lend(){
                   error: (e)=> e
                 }); 
               }}}  />
-              <select onChange={(e)=>console.log(e.target.value)} >
+              <select onChange={(e)=>changerOptions(e)} >
                 <option value={0} >clase</option>
                 <option value={1} >libre</option>
               </select>
@@ -41,6 +41,26 @@ export default function Lend(){
                 loading: "buscando clase...",
                 error: (e)=> e
               })} >Ingresar</button> 
+              </div>
+              <div style={free? {} : {display:"none"}} >
+                <div>
+                  <label>Profesor</label>
+                  <input type="text" />
+                  <select>
+                    <option>prueba</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Salon</label>
+                  <input type="text" />
+                  <select>
+                    <option>prueba</option>
+                  </select>
+                </div>
+                <select onChange={(e)=>changerOptions(e)} >
+                  <option value={1} >libre</option>
+                  <option value={0} >clase</option>
+                </select>
               </div>
             </div>
             <div className="Lend-Student-Active" style={classs.idsalon? {} : {display: "none"}} >
