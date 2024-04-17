@@ -18,6 +18,7 @@ function Prestamista(){
           <ButtonImage image={"http://localhost:8000/upload/predefault/historial.png"} title={"Historias"} path={"/historial"} />
         </PanelMain>
       </BodyMain>
+      <CloseSession />
     </Body> 
   );
 }

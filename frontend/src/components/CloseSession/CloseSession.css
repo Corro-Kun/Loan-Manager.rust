@@ -1,0 +1,19 @@
+.CloseSession-Div{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.CloseSession-Div button{
+  padding: 5px 10px;
+  background-color: var(--Bg2_Color);
+  color: var(--Text_Color);
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: .3s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+.CloseSession-Div button:hover{
+  background: var(--Main_Color);
+}
