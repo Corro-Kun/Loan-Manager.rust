@@ -16,7 +16,10 @@ function Admin(){
           <ButtonImage image={"http://localhost:8000/upload/predefault/crearusuario.png"} title={"Crear usuario"} path={"/new/user"} /> 
           <ButtonImage image={"http://localhost:8000/upload/predefault/crearobjeto.png"} title={"Crear un objeto"} path={"/new/item"} />
           <ButtonImage image={"http://localhost:8000/upload/predefault/crearestudiante.png"} title={"Crear estudiante"} path={"/new/student"} /> 
-          <ButtonImage image={"http://localhost:8000/upload/predefault/lista.png"} title={"Lista general"} path={"/list/some"} />
+          {
+            //<ButtonImage image={"http://localhost:8000/upload/predefault/lista.png"} title={"Lista general"} path={"/list/some"} />
+          }
+          <ButtonImage image={"http://localhost:8000/upload/predefault/gestionclase.png"} title={"gestion de clase"} path={""} />
         </PanelMain>      
       </BodyMain>
 
