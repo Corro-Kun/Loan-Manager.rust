@@ -30,7 +30,7 @@ export default function History(){
               { data?.estado === "0" ?
               <img src={data?.imagen_user} />
               :
-              <img src="https://cdn-icons-png.flaticon.com/512/11373/11373793.png" />
+              <img src="http://localhost:8000/upload/predefault/check.png" />
               }
             </picture>
             <div className="History-Text" >

@@ -33,7 +33,7 @@ export default function ReturnDash(){
         :
           <div className="ReturnDash-Picture" >
             <picture onClick={()=> navegate("/gestion/devolver/selecionar")} >
-              <img src="https://cdn-icons-png.flaticon.com/512/7941/7941531.png" />
+              <img src="http://localhost:8000/upload/predefault/mas.png" />
             </picture>
           </div>
       }

@@ -122,7 +122,7 @@ export default function Lend(){
         <div className="Lend-Item" >
           <div className="Lend-item-Plus" style={item.iditem? {display: "none"} : {}} onClick={()=> navigate("/gestion/prestamo/selecionar")} >
             <picture>
-              <img src="https://cdn-icons-png.flaticon.com/512/7941/7941531.png" />
+              <img src="http://localhost:8000/upload/predefault/mas.png" />
             </picture> 
           </div>
           <div className="Lend-Item-Select" style={item.iditem? {} : {display: "none"}} >

@@ -8,7 +8,7 @@ import {toast} from "sonner";
 export default function NewUser(){
   const navigate = useNavigate(); 
   const inputImage = useRef(null);
-  const [img, setImg] = useState("https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514693/77979774-dise%C3%B1o-gr%C3%A1fico-del-ejemplo-del-vector-del-icono-del-perfil-del-hombre-joven.jpg");
+  const [img, setImg] = useState("http://localhost:8000/upload/predefault/fotodeperfil.png");
   const {changerUsuario, handleUsuario, changerCreation, profesor, changerClass, HandleClass, classEmpty, addClass} = useAdmin();
 
   return(

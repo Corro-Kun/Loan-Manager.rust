@@ -13,9 +13,9 @@ function Prestamista(){
           <CardProfile />
         </ProfileProvider>
         <PanelMain>
-          <ButtonImage image={"https://cdn-icons-png.flaticon.com/512/15334/15334547.png"} title={"Prestar"} path={"/gestion/prestamo"}  />
-          <ButtonImage image={"https://cdn-icons-png.flaticon.com/512/1440/1440524.png"} title={"Devolver"} path={"/gestion/devolver"} />
-          <ButtonImage image={"https://cdn-icons-png.flaticon.com/512/1584/1584831.png"} title={"Historias"} path={"/historial"} />
+          <ButtonImage image={"http://localhost:8000/upload/predefault/prestar.png"} title={"Prestar"} path={"/gestion/prestamo"}  />
+          <ButtonImage image={"http://localhost:8000/upload/predefault/devolver.png"} title={"Devolver"} path={"/gestion/devolver"} />
+          <ButtonImage image={"http://localhost:8000/upload/predefault/historial.png"} title={"Historias"} path={"/historial"} />
         </PanelMain>
       </BodyMain>
     </Body> 
