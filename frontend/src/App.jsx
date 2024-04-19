@@ -15,6 +15,7 @@ import SelectItemPage from "./page/SelectItemPage.jsx";
 import HistorePage from "./page/HistorePage.jsx";
 import Return from "./page/Return.jsx";
 import SelectItemReturn from "./page/SelectItemReturn.jsx";
+import ManagementTeacher from "./page/managementTeacher.jsx";
 
 function App(){
   return(
@@ -30,6 +31,7 @@ function App(){
           <Route path="/new/item" element={<CreateItem />} />
           <Route path="/new/student" element={<CreateStudent />} />
           <Route path="/list/some" element={<ListAdmin />} />
+          <Route path="/management/teacher" element={<ManagementTeacher />} />
         </Route>
         {/* Prestamista */}
         <Route element={<RolPrestamista />} > 

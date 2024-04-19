@@ -20,7 +20,7 @@ function Admin(){
           {
             //<ButtonImage image={"http://localhost:8000/upload/predefault/lista.png"} title={"Lista general"} path={"/list/some"} />
           }
-          <ButtonImage image={"http://localhost:8000/upload/predefault/gestionclase.png"} title={"gestion de clase"} path={""} />
+          <ButtonImage image={"http://localhost:8000/upload/predefault/gestionclase.png"} title={"gestion de clase"} path={"/management/teacher"} />
         </PanelMain>      
       </BodyMain>
       <CloseSession />
