@@ -33,3 +33,10 @@
 .ButtonImage-Div img{
   height: 100%;
 }
+
+/* aplication pc */
+@media screen and (max-width: 1210px){
+  .ButtonImage-Div{
+    width: 25%;
+  }
+}

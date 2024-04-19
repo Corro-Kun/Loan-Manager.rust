@@ -319,3 +319,24 @@
   background: transparent;
   border: 1px solid var(--Main_Color);
 }
+
+/* aplication pc */
+@media screen and (max-width: 1210px){
+  .Lend-Div{
+    width: 70%;
+    height: 90%;
+  }
+  .Lend-Users{
+    height: 48%;
+  }
+  .Lend-Student-Card{
+    height: 62%;
+    width: 45%; 
+  }
+  .Lend-Student-Card img{
+    height: 120px;
+  }
+  .Lend-item-Plus img{
+    height: 140px;
+  }
+}

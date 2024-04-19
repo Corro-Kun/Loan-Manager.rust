@@ -77,3 +77,10 @@
   font-weight: bold;
   color: var(--Main_Color);
 }
+
+@media screen and (max-width: 1210px){
+  .History-Render  {
+    width: 75%;
+  }
+}
+ 

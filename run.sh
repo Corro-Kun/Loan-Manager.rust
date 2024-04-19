@@ -1,3 +1,4 @@
+#git pull
 cd backend
 cargo run &
 cd ..
