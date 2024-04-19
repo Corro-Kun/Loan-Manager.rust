@@ -4,6 +4,7 @@ import ButtonImage from "../components/ButtonImage/ButtonImage.jsx";
 import CardProfile from "../components/CardProfile/CardProfile";
 import PanelMain from "../components/PanelMain/PanelMain.jsx";
 import {ProfileProvider} from "../context/profile.jsx";
+import CloseSession from "../components/CloseSession/CloseSession.jsx";
 
 function Prestamista(){
   return(

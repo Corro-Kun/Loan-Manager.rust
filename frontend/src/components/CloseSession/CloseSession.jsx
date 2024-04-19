@@ -2,7 +2,7 @@ import "./CloseSession.css";
 import {useNavigate} from "react-router-dom";
 import {toast} from "sonner";
 
-export function CloseSession(){
+export default function CloseSession(){
   const navigate = useNavigate();
 
   function Close(){

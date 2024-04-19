@@ -4,7 +4,7 @@ import CardProfile from "../components/CardProfile/CardProfile.jsx";
 import ButtonImage from "../components/ButtonImage/ButtonImage.jsx";
 import PanelMain from "../components/PanelMain/PanelMain.jsx";
 import {ProfileProvider} from "../context/profile.jsx";
-import { CloseSession } from "../components/CloseSession/CloseSession.jsx";
+import CloseSession from "../components/CloseSession/CloseSession.jsx";
 
 function Admin(){
   return(
