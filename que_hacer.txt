@@ -1,9 +1,0 @@
-el prestador:
-
-- necesita elegir un item y prestarlo a un salon con el profesor
-- el sistema mostrar el salon que tenga profesor
-- cambiar de estado del item prestador
-- al prestar un item solo saldran los que no estan prestados
-- vera la lista de items que estan prestados con el profesor que lo tiene y el que lo presto
-- ver la lista de items prestados por ti
-- ver historial de prestamos de un item
