@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useReturnLend} from "../../context/returnLend";
 import { IoMdCloseCircle } from "react-icons/io";
 import {toast} from "sonner";
+import {IMAGES} from "../../CONSTANS.js";
 
 export default function ReturnDash(){
   const navegate = useNavigate();
@@ -25,7 +26,7 @@ export default function ReturnDash(){
           <div className="ReturnDash-Select" >
             <div>
               <picture>
-                <img src={itemR?.imagen} />
+                <img src={`${IMAGES}${itemR?.imagen}`} />
               </picture>
               <h3>{itemR?.nombre}</h3>
             </div>
@@ -33,7 +34,7 @@ export default function ReturnDash(){
         :
           <div className="ReturnDash-Picture" >
             <picture onClick={()=> navegate("/gestion/devolver/selecionar")} >
-              <img src="http://localhost:8000/upload/predefault/mas.png" />
+              <img src={`${IMAGES}/upload/predefault/mas.png`} />
             </picture>
           </div>
       }

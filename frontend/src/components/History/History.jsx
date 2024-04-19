@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {getHistory} from "../../api/api.js";
 import { GiExitDoor } from "react-icons/gi";
 import {useNavigate} from "react-router-dom";
+import {IMAGES} from "../../CONSTANS.js";
 
 export default function History(){
   const [history, setHistory] = useState([]);
@@ -28,9 +29,9 @@ export default function History(){
           <div key={i} className="History-Card">
             <picture>
               { data?.estado === "0" ?
-              <img src={data?.imagen_user} />
+              <img src={`${IMAGES}${data?.imagen_user}`} />
               :
-              <img src="http://localhost:8000/upload/predefault/check.png" />
+              <img src={`${IMAGES}/upload/predefault/check.png`} />
               }
             </picture>
             <div className="History-Text" >
@@ -42,7 +43,7 @@ export default function History(){
               }
             </div>
             <picture>
-              <img src={data?.imagen_item} />
+              <img src={`${IMAGES}${data?.imagen_item}`} />
             </picture>
           </div>
           ))

@@ -1,5 +1,6 @@
 import {useEffect} from "react";
 import {useReturnLend} from "../../context/returnLend";
+import { IMAGES } from "../../CONSTANS";
 
 export default function ListLend(){
   const {getItem, item, searchItem, saveItem} = useReturnLend();
@@ -18,7 +19,7 @@ export default function ListLend(){
           item.map((data, i)=>(
             <div key={i} className="ListAvaliable-Card" onClick={()=> saveItem(i)} >
               <picture>
-                <img src={data?.imagen} />
+                <img src={`${IMAGES}${data?.imagen}`} />
               </picture>
               <p>{data?.iditem}</p>
               <h3>{data?.nombre}</h3>

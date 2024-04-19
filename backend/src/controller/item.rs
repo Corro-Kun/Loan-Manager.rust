@@ -99,7 +99,7 @@ pub async fn post_item(mut item: Form<AddItem<'_>>) -> Result<Json<Message>, Cus
 
     let query_2 = String::from("INSERT INTO items(iditem, nombre, descripcion, imagen) VALUES (?, ?, ?, ?)");
 
-    conn.exec_drop(&query_2,(&item.iditem, &item.nombre, &item.descripcion, format!("http://localhost:8000/upload/item/{}.png", item.iditem))).expect("Ocurrio un Error al guardar el archivo");
+    conn.exec_drop(&query_2,(&item.iditem, &item.nombre, &item.descripcion, format!("/upload/item/{}.png", item.iditem))).expect("Ocurrio un Error al guardar el archivo");
 
     let message = Message{
         message: String::from("Item creado") 

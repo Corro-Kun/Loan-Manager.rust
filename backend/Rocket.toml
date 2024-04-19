@@ -1,5 +1,5 @@
 [default]
-# address = "192.168.20.24"
+address = "192.168.20.24"
 # port = 80
 
 [default.limits]

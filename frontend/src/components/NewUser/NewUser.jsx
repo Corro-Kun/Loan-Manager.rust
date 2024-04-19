@@ -4,11 +4,12 @@ import {useNavigate} from "react-router-dom";
 import {useRef, useState} from "react";
 import {useAdmin} from "../../context/admin.jsx";
 import {toast} from "sonner";
+import {IMAGES} from "../../CONSTANS.js";
 
 export default function NewUser(){
   const navigate = useNavigate(); 
   const inputImage = useRef(null);
-  const [img, setImg] = useState("http://localhost:8000/upload/predefault/fotodeperfil.png");
+  const [img, setImg] = useState(`${IMAGES}/upload/predefault/fotodeperfil.png`);
   const {changerUsuario, handleUsuario, changerCreation, profesor, changerClass, HandleClass, classEmpty, addClass} = useAdmin();
 
   return(

@@ -1,4 +1,4 @@
-const backend = "http://127.0.0.1:8000"
+const backend = "http://192.168.20.24:8000"
 
 // funcion for login
 

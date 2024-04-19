@@ -5,6 +5,7 @@ import { HiTrash } from "react-icons/hi2";
 import {toast} from "sonner";
 import "./Lend.css";
 import {useNavigate} from "react-router-dom";
+import {IMAGES} from "../../CONSTANS.js";
 
 export default function Lend(){
   const {changerStudent, handleStudent, apiStudent, deleteStudent, getStudentSave, changerClass, handleClass, classs, hidenClass, deleteClass, item, deleteItem, deleteAll, handleLend, free, changerOptions, teacher, salon, changerData} = useLend();
@@ -122,13 +123,13 @@ export default function Lend(){
         <div className="Lend-Item" >
           <div className="Lend-item-Plus" style={item.iditem? {display: "none"} : {}} onClick={()=> navigate("/gestion/prestamo/selecionar")} >
             <picture>
-              <img src="http://localhost:8000/upload/predefault/mas.png" />
+              <img src={`${IMAGES}/upload/predefault/mas.png`} />
             </picture> 
           </div>
           <div className="Lend-Item-Select" style={item.iditem? {} : {display: "none"}} >
             <div><h2 style={{color: "transparent"}} >x</h2><p>item a prestar</p><h2 onClick={()=> deleteItem()} ><HiTrash/></h2></div> 
             <picture>
-              <img src={item?.imagen} />
+              <img src={`${IMAGES}${item?.imagen}`} />
             </picture>
             <h3>{item?.nombre}</h3>
           </div>

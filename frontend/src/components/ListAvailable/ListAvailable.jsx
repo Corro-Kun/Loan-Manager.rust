@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import "./ListAvailable.css";
 import { useLend } from "../../context/lend";
+import {IMAGES} from "../../CONSTANS.js";
 
 export default function ListAvaliable(){
   const {items, getItems, searchItem, saveItem} = useLend();
@@ -19,7 +20,7 @@ export default function ListAvaliable(){
           items.map((i, a)=> (
             <div key={i.iditem} className="ListAvaliable-Card" onClick={()=> saveItem(a)} >
               <picture>
-                <img src={i.imagen} />
+                <img src={`${IMAGES}${i.imagen}`} />
               </picture>
               <p>{i.iditem}</p>
               <h3>{i.nombre}</h3>

@@ -4,11 +4,12 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import {useAdmin} from "../../context/admin.jsx";
 import {toast} from "sonner";
 import {useNavigate} from "react-router-dom";
+import {IMAGES} from "../../CONSTANS.js";
 
 export default function FormItem(){
   const {changerItem, handleItem, ImageDownload} = useAdmin();
   const inputImg = useRef(null);
-  const images = ["http://localhost:8000/upload/predefault/llaves.png", "http://localhost:8000/upload/predefault/proyector.png", "http://localhost:8000/upload/predefault/laptop.png"];
+  const images = [`${IMAGES}/upload/predefault/llaves.png`, `${IMAGES}/upload/predefault/proyector.png`, `${IMAGES}/upload/predefault/laptop.png`];
   const [image, setImage] = useState(images[0]);
   const [index, setIndex] = useState(0);
   const [animation, setAnimation] = useState(false);
