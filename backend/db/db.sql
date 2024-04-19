@@ -55,7 +55,7 @@ CREATE TABLE `historial` (
   PRIMARY KEY (`idhorario`),
   KEY `idprestamo` (`idprestamo`),
   CONSTRAINT `historial_ibfk_1` FOREIGN KEY (`idprestamo`) REFERENCES `prestamo` (`idprestamo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `prestamo` (
   CONSTRAINT `prestamo_ibfk_3` FOREIGN KEY (`iditem`) REFERENCES `items` (`iditem`),
   CONSTRAINT `prestamo_ibfk_4` FOREIGN KEY (`idprofesor`) REFERENCES `profesor` (`idprofesor`),
   CONSTRAINT `prestamo_ibfk_5` FOREIGN KEY (`idestudiante`) REFERENCES `estudiante` (`idestudiante`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-11 12:49:43
+-- Dump completed on 2024-04-19 13:36:04
