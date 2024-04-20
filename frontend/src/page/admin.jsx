@@ -20,8 +20,8 @@ function Admin(){
           <ButtonImage image={`${IMAGES}/upload/predefault/crearestudiante.png`} title={"Crear estudiante"} path={"/new/student"} /> 
           {
             //<ButtonImage image={"http://localhost:8000/upload/predefault/lista.png"} title={"Lista general"} path={"/list/some"} />
+            //<ButtonImage image={`${IMAGES}/upload/predefault/gestionclase.png`} title={"gestion de clase"} path={"/management/teacher"} />
           }
-          <ButtonImage image={`${IMAGES}/upload/predefault/gestionclase.png`} title={"gestion de clase"} path={"/management/teacher"} />
         </PanelMain>      
       </BodyMain>
       <CloseSession />

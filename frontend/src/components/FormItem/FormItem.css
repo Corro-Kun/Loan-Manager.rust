@@ -130,3 +130,17 @@
   background-color: var(--Bg2_Color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+@media screen and (max-width: 1210px){
+  .FormItem-Div{
+    height: 90%;
+    width: 40%;
+  }
+  .FormItem-Div-Picture picture{
+    height: 240px;
+    width: 55%;
+  }
+  .FormItem-Div-Picture img{
+    height: 260px;
+  }
+}

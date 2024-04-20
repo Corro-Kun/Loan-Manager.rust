@@ -147,3 +147,13 @@
   border-top: 3px solid var(--Main_Color);
   border-left: 3px solid var(--Main_Color);
 }
+
+
+@media screen and (max-width: 1210px){
+  .NewUser-Div{ 
+    height: 70%;
+    width: 80%;
+  }
+}
+
+

@@ -6,3 +6,10 @@
   flex-wrap: wrap;
   gap: 30px;
 }
+
+
+@media screen and (max-width: 1210px){
+  .PanelMain-Div{
+    height: 34vh;
+  } 
+}
