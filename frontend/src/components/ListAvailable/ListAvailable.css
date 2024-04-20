@@ -10,7 +10,7 @@
   display: flex;
   padding: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .ListAvaliable-Input input{
@@ -19,6 +19,10 @@
   border: 1px solid var(--Main_Color);
   outline: none;
   border-radius: 5px;
+}
+
+.ListAvaliable-Input h2{
+  cursor: pointer;
 }
 
 .ListAvaliable-Content{

@@ -1,9 +1,13 @@
 import {useEffect} from "react";
 import {useReturnLend} from "../../context/returnLend";
 import { IMAGES } from "../../CONSTANS";
+import { FaArrowRightFromBracket } from "react-icons/fa6";
+import {useNavigate} from "react-router-dom";
+
 
 export default function ListLend(){
   const {getItem, item, searchItem, saveItem} = useReturnLend();
+  const navegate = useNavigate();
 
   useEffect(()=>{
     getItem();
@@ -12,7 +16,9 @@ export default function ListLend(){
   return(
     <div className="ListAvaliable-Div" >
       <div className="ListAvaliable-Input" >
+        <h2></h2>
         <input type="text" placeholder="id" onChange={(e)=> searchItem(e)} />
+        <h2 onClick={()=> navegate("/gestion/devolver")} ><FaArrowRightFromBracket /></h2>
       </div>
       <div className="ListAvaliable-Content" >
         {
