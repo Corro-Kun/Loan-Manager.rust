@@ -15,19 +15,17 @@ export default function LoginRegister(){
     try{
       const {shouldUpdate, manifest} = await checkUpdate();
       if(!shouldUpdate) return;
-      console.log(
-      `Installing update ${manifest?.version}, ${manifest?.date}, ${manifest?.body}`
-    )
+      toast.loading(`Installing update ${manifest?.version}, ${manifest?.date}, ${manifest?.body}`)
       await installUpdate();
       await relaunch();
     }catch(e){
-      console.error(e);
+      toast.error("Error al actualizar "+e);
     }
   }
 
   useEffect(()=>{
     update();
-  },[]);
+  },[])
 
   return(
   <div className="Render-LoginRegister">
