@@ -9,22 +9,20 @@ export default function LoginRegister(){
   const {ChangerLogin, HandleLogin} = useProfile();
 
   async function update(){
-    const {shouldUpdate, manifest} = await checkUpdate();
     const unlisten = await onUpdaterEvent(({error, status})=>{
-      console.log(status);
+      console.log("no mames",error,status);
     });
-    if(shouldUpdate){
-      toast(`Nueva actualización ${manifest?.version}`,{
-        action: {
-          label: "Actualizar",
-          onClick: async()=>{
-            await installUpdate();
-            await relaunch();
-          }
-        }
-      });
+    try{
+      const {shouldUpdate, manifest} = await checkUpdate();
+      if(!shouldUpdate) return;
+      console.log(
+      `Installing update ${manifest?.version}, ${manifest?.date}, ${manifest?.body}`
+    )
+      await installUpdate();
+      await relaunch();
+    }catch(e){
+      console.error(e);
     }
-    unlisten();
   }
 
   useEffect(()=>{
